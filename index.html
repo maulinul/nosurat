@@ -130,6 +130,45 @@
   .nav-item:hover .nav-icon { transform: scale(1.15); }
   .nav-shortcut { margin-left: auto; font-size: 10px; font-family: monospace; color: var(--textMuted); opacity: 0; transition: opacity 0.2s, transform 0.2s; }
   .nav-item:hover .nav-shortcut { opacity: 1; transform: translateX(-2px); }
+  /* Quick Links (Beyond Links) */
+  .ql-wrap { position: relative; padding: 0 12px; margin: 8px 0; animation: fadeInUp 0.4s ease-out 0.25s both; }
+  .ql-trigger {
+    width: 100%; display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-radius: 10px; border: 1px dashed var(--borderStrong);
+    background: transparent; color: var(--textSecondary); font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    font-family: inherit;
+  }
+  .ql-trigger:hover { background: var(--surfaceHover); color: var(--textPrimary); border-color: var(--accent); transform: translateX(4px); }
+  .ql-trigger.on { background: var(--accentLight); color: var(--accent); border-color: var(--accent); border-style: solid; }
+  .ql-icon { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.7; }
+  .ql-trigger:hover .ql-icon { opacity: 1; }
+  .ql-trigger span { flex: 1; text-align: left; }
+  .ql-arrow { transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); flex-shrink: 0; opacity: 0.5; }
+  .ql-trigger.on .ql-arrow { transform: rotate(180deg); opacity: 1; }
+  .ql-panel {
+    position: absolute; left: 12px; right: 12px; bottom: calc(100% + 6px);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 6px;
+    box-shadow: 0 -8px 32px var(--shadowHover);
+    opacity: 0; visibility: hidden; transform: translateY(4px);
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1); z-index: 200;
+    max-height: 280px; overflow-y: auto;
+  }
+  .ql-panel.on { opacity: 1; visibility: visible; transform: translateY(0); }
+  .ql-panel:empty::before { content: 'Belum ada link'; display: block; padding: 12px; text-align: center; font-size: 12px; color: var(--textMuted); }
+  .ql-item {
+    display: block; padding: 8px 10px; border-radius: 8px;
+    color: var(--textSecondary); text-decoration: none; font-size: 12px;
+    transition: all 0.2s; line-height: 1.4;
+    border: none; background: none; width: 100%; text-align: left; cursor: pointer;
+    font-family: inherit;
+  }
+  .ql-item:hover { background: var(--accentLight); color: var(--accent); }
+  .ql-item-title { font-weight: 600; font-size: 12px; display: block; }
+  .ql-item-url { font-size: 10px; color: var(--textMuted); display: block; margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+  .ql-item:hover .ql-item-url { color: var(--accent); opacity: 0.7; }
+  .ql-divider { height: 1px; background: var(--divider); margin: 2px 6px; }
   .sidebar-footer { padding: 16px; border-top: 1px solid var(--border); animation: fadeInUp 0.5s ease-out 0.3s both; }
   .theme-toggle { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; background: var(--primaryLight); border: 1px solid var(--border); color: var(--textSecondary); font-size: 12px; cursor: pointer; width: 100%; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
   .theme-toggle:hover { background: var(--accentLight); color: var(--accent); transform: translateY(-1px); box-shadow: 0 4px 12px var(--shadowHover); }
@@ -489,7 +528,331 @@
   .glow-border { position: relative; }
   .attention { animation: shake 0.6s ease-out; }
   .entry-fade { animation: fadeInUp 0.5s ease-out both; }
+
+  /* ===== TEMPLATE BUILDER (Screenshot Reference) ===== */
+  .template-builder-shortcuts {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    animation: fadeInDown 0.4s ease-out;
+  }
+  .template-builder-shortcuts .shortcut-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--textMuted);
+  }
+  .template-builder-shortcuts .shortcut-badge kbd {
+    background: var(--primaryLight);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 10px;
+    border: 1px solid var(--border);
+  }
+  .template-builder-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+    animation: fadeInUp 0.5s ease-out;
+  }
+  @media (max-width: 900px) {
+    .template-builder-layout { grid-template-columns: 1fr; }
+  }
+  .template-builder-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: fadeInLeft 0.5s ease-out 0.1s both;
+  }
+  .builder-heading {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--textPrimary);
+    margin-bottom: 4px;
+  }
+  .template-form-group {
+    margin-bottom: 4px;
+  }
+  .template-form-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--textSecondary);
+    margin-bottom: 6px;
+  }
+  .template-form-hint {
+    font-size: 12px;
+    color: var(--textMuted);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* Preview Panel */
+  .template-preview-panel {
+    background: var(--bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 24px;
+    animation: fadeInRight 0.5s ease-out 0.2s both;
+    height: fit-content;
+    position: sticky;
+    top: 24px;
+  }
+  .preview-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--textMuted);
+    margin-bottom: 12px;
+  }
+  .preview-subtitle {
+    font-size: 12px;
+    color: var(--textMuted);
+    margin-bottom: 10px;
+  }
+  .preview-box {
+    background: var(--surface);
+    border: 1.5px solid var(--borderStrong);
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-family: monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--textPrimary);
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    transition: all 0.3s;
+    word-break: break-all;
+  }
+  .preview-box:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 16px var(--accentRing);
+  }
+
+  /* Structure List */
+  .structure-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .structure-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--textSecondary);
+    line-height: 1.5;
+    animation: staggerFadeIn 0.35s ease-out backwards;
+  }
+  .structure-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--textMuted);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0px;
+  }
+  .structure-text { color: var(--textPrimary); font-weight: 500; }
+  .structure-equals { color: var(--accent); font-weight: 600; }
+
+  /* Segment Builder Items */
+  .segment-builder-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .segment-builder-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    animation: staggerSlideLeft 0.35s ease-out backwards;
+    cursor: grab;
+  }
+  .segment-builder-item:nth-child(1) { animation-delay: 0s; }
+  .segment-builder-item:nth-child(2) { animation-delay: 0.04s; }
+  .segment-builder-item:nth-child(3) { animation-delay: 0.08s; }
+  .segment-builder-item:nth-child(4) { animation-delay: 0.12s; }
+  .segment-builder-item:nth-child(5) { animation-delay: 0.16s; }
+  .segment-builder-item:nth-child(6) { animation-delay: 0.20s; }
+  .segment-builder-item:nth-child(7) { animation-delay: 0.24s; }
+  .segment-builder-item:nth-child(8) { animation-delay: 0.28s; }
+  .segment-builder-item:nth-child(9) { animation-delay: 0.32s; }
+  .segment-builder-item:nth-child(10) { animation-delay: 0.36s; }
+  .segment-builder-item:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px var(--shadow);
+    transform: translateX(2px);
+  }
+  .segment-builder-item.dragging {
+    opacity: 0.6;
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px var(--shadowHover);
+    cursor: grabbing;
+    z-index: 10;
+  }
+  /* 6-dot grip handle (2 rows × 3 dots) */
+  .segment-grip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    cursor: grab;
+    padding: 2px;
+    opacity: 0.35;
+    transition: opacity 0.2s;
+    width: 18px;
+    flex-shrink: 0;
+  }
+  .segment-builder-item:hover .segment-grip { opacity: 0.7; }
+  .segment-grip-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--textMuted);
+    border-radius: 50%;
+  }
+  .segment-separator {
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--textMuted);
+    padding: 0 2px;
+    flex-shrink: 0;
+    min-width: 20px;
+    text-align: center;
+  }
+  .segment-select-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 140px;
+  }
+  .segment-select-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid var(--textMuted);
+    pointer-events: none;
+  }
+  .segment-select-wrapper select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 28px;
+  }
+  .segment-type-select {
+    flex: 1;
+    min-width: 140px;
+    font-size: 13px;
+  }
+  .segment-value-input {
+    width: 80px;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+  .segment-actions {
+    display: flex;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+  .segment-action-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: var(--textMuted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 12px;
+    padding: 0;
+  }
+  .segment-action-btn:hover {
+    background: var(--surfaceHover);
+    color: var(--textPrimary);
+  }
+  .segment-action-btn.delete:hover {
+    background: var(--errorBg);
+    color: var(--error);
+  }
+  .segment-action-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+
+  .add-segment-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .add-segment-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 0;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .add-segment-btn:hover {
+    color: var(--accentHover);
+    transform: translateY(-1px);
+  }
+
+  .builder-save-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: var(--textInverse);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    margin-top: 8px;
+    align-self: flex-start;
+  }
+  .builder-save-btn:hover {
+    background: var(--primaryHover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--shadowHover);
+  }
+  .builder-save-btn:active {
+    transform: translateY(0);
+  }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -539,6 +902,17 @@
         <span class="nav-shortcut">Alt+P</span>
       </button>
     </nav>
+
+    <!-- Beyond Links Dropdown -->
+    <div class="ql-wrap">
+      <button class="ql-trigger" id="qlTrigger" onclick="toggleQuickLinks(event)">
+        <svg class="ql-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/><line x1="12" y1="2" x2="12" y2="22" opacity="0.3" stroke-dasharray="2 3"/></svg>
+        <span>Beyond Links</span>
+        <svg class="ql-arrow" id="qlArrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="ql-panel" id="qlPanel"></div>
+    </div>
+
     <div class="sidebar-footer">
       <button class="theme-toggle" onclick="toggleTheme()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -592,9 +966,7 @@
           </div>
         </div>
         <div class="tabs">
-          <button class="tab active" onclick="switchMasterTab('segments', this)">Segmen Nomor</button>
-          <button class="tab" onclick="switchMasterTab('companies', this)">Perusahaan</button>
-          <button class="tab" onclick="switchMasterTab('projects', this)">Proyek</button>
+          <button class="tab active" onclick="switchMasterTab('codes', this)">Kode Referensi</button>
           <button class="tab" onclick="switchMasterTab('formats', this)">Format Bulan/Tahun</button>
           <button class="tab" onclick="switchMasterTab('templates', this)">Template</button>
         </div>
@@ -968,7 +1340,7 @@ const DEFAULT_TEMPLATES = [
   { id: 't3', name: 'Surat Keluar', desc: 'Untuk penomoran surat-surat penting', segments: ['counter','type','project','month','year'], counter: 1, prefix: '001', format: '001/SRT/SBIZ/{month}/{year}' },
   { id: 't4', name: 'SPM', desc: 'Permintaan pembelian barang', segments: ['counter','type','company','month','year'], counter: 334, prefix: '334', format: '334/SPM-PROJECT/IPI/{month}/{year}' }
 ];
-const SEGMENT_TYPES = [
+let SEGMENT_TYPES = [
   { key: 'counter', label: 'Counter', editable: false, sample: '291' },
   { key: 'company', label: 'Perusahaan', editable: true, sample: 'IPI' },
   { key: 'division', label: 'Divisi', editable: true, sample: 'BAHP' },
@@ -977,6 +1349,7 @@ const SEGMENT_TYPES = [
   { key: 'month', label: 'Bulan', editable: false, sample: 'VI' },
   { key: 'year', label: 'Tahun', editable: false, sample: '2026' }
 ];
+const MAX_SEGMENTS = 10;
 const THEME_PRESETS = [
   { id: 'warm', name: 'Warm Sand', colors: { bg:'#F7F5F0', surface:'#FFFFFF', primary:'#2C2825', accent:'#4A8B7F', textPrimary:'#1E1B18' } },
   { id: 'cool', name: 'Cool Breeze', colors: { bg:'#F0F4F8', surface:'#FFFFFF', primary:'#1E293B', accent:'#3B82F6', textPrimary:'#0F172A' } },
@@ -1003,7 +1376,8 @@ let state = {
   projects: [{code:'MBG', name:'MBG Project'}, {code:'SBIZ', name:'Sunbiz Project'}],
   segmentCodes: { company: ['IPI','SBIZ'], division: ['BAHP'], project: ['MBG','SBIZ'], type: ['SRT','SPM-PROJECT'] },
   settings: { statuses: [...DEFAULT_STATUSES], autoResetYear: true, monthFormat: 'roman', theme: 'light', themePreset: 'warm', customColors: {}, customCSS: '', mouseTrail: 'none', githubToken: '', gistId: '' },
-  currentEditId: null, masterTab: 'segments', selectedDocIds: new Set()
+  currentEditId: null, masterTab: 'codes', selectedDocIds: new Set(),
+  segmentTypes: null, customSegments: []
 };
 let archivePage = 1;
 const archivePerPage = 10;
@@ -1056,12 +1430,12 @@ function init() {
   renderAll();
   setupKeyboard();
   setupAutoReset();
-  setupCtrlEnter();
   setupRippleButtons();
   animateScrollIndicator();
   document.getElementById('docDate').value = new Date().toISOString().split('T')[0];
   animateEntry();
   renderGithubSyncUI();
+  renderQuickLinks();
 }
 function animateEntry() {
   document.querySelectorAll('.nav-item').forEach((item, i) => {
@@ -1086,12 +1460,16 @@ function loadState() {
       state.segmentCodes = parsed.segmentCodes || state.segmentCodes;
       state.settings = { ...state.settings, ...(parsed.settings || {}) };
       if (parsed.settings && parsed.settings.selectedDocIds) state.selectedDocIds = new Set(parsed.settings.selectedDocIds);
+      state.segmentTypes = parsed.segmentTypes || null;
+      state.customSegments = parsed.customSegments || [];
+      if (state.segmentTypes) SEGMENT_TYPES = state.segmentTypes;
     }
   } catch(e) { console.error('Load error', e); }
 }
 function saveState() {
   try {
-    const toSave = { ...state, settings: { ...state.settings, selectedDocIds: Array.from(state.selectedDocIds) } };
+    state.segmentTypes = SEGMENT_TYPES;
+    const toSave = { ...state, settings: { ...state.settings, selectedDocIds: Array.from(state.selectedDocIds) }, segmentTypes: SEGMENT_TYPES };
     localStorage.setItem('letterlog_state', JSON.stringify(toSave));
     showToast('Data tersimpan', 'success');
   } catch(e) { showToast('Gagal menyimpan', 'error'); }
@@ -1166,6 +1544,36 @@ function navigate(page) {
   if (page === 'create') { state.currentEditId = null; resetForm(); renderFormOptions(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// ===================== QUICK LINKS (BEYOND LINKS) =====================
+var quickLinks = [
+  {title:'Main Menu',      url:'https://maulinul.github.io/masterweb/'},
+  {title:'Daily Log',      url:'https://maulinul.github.io/dailyloggweh/'},
+  {title:'No Surat',       url:'https://maulinul.github.io/nosurat/'},
+  {title:'Prompt Library', url:'https://maulinul.github.io/prompt2/'}
+];
+var qlOpen = false;
+function toggleQuickLinks(e) {
+  e.stopPropagation();
+  qlOpen = !qlOpen;
+  document.getElementById('qlTrigger').classList.toggle('on', qlOpen);
+  document.getElementById('qlPanel').classList.toggle('on', qlOpen);
+}
+function renderQuickLinks() {
+  var panel = document.getElementById('qlPanel');
+  if (!panel) return;
+  panel.innerHTML = quickLinks.map(function(l, i) {
+    return '<a href="' + l.url + '" target="_blank" rel="noopener" class="ql-item">' +
+             '<span class="ql-item-title">' + l.title + '</span>' +
+             '<span class="ql-item-url">' + l.url + '</span>' +
+           '</a>' + (i < quickLinks.length - 1 ? '<div class="ql-divider"></div>' : '');
+  }).join('');
+}
+// Tutup quick links saat klik di luar
+document.addEventListener('click', function() {
+  if (qlOpen) { qlOpen = false; document.getElementById('qlTrigger').classList.remove('on'); document.getElementById('qlPanel').classList.remove('on'); }
+});
+
 function setupKeyboard() {
   document.addEventListener('keydown', e => {
     if (e.altKey) {
@@ -1175,7 +1583,15 @@ function setupKeyboard() {
       if (e.key === 'a') { e.preventDefault(); navigate('archive'); }
       if (e.key === 'p') { e.preventDefault(); navigate('settings'); }
     }
-    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Escape') {
+      if (document.getElementById('modalOverlay')?.classList.contains('active')) { closeModal(); return; }
+      if (state.masterTab === 'template-builder') { cancelBuilder(); return; }
+    }
+    if (e.ctrlKey && e.key === 'Enter') {
+      const createPage = document.getElementById('page-create');
+      if (createPage && !createPage.classList.contains('hidden')) { e.preventDefault(); saveDocument(); return; }
+      if (state.masterTab === 'template-builder') { e.preventDefault(); saveBuilderTemplate(); return; }
+    }
   });
 }
 function setupCtrlEnter() {
@@ -1222,13 +1638,14 @@ function onTemplateChange() {
   const tmpl = state.templates.find(t => t.id === tid) || state.templates[0];
   const segList = document.getElementById('segmentList');
   segList.innerHTML = '';
+  const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
   tmpl.segments.forEach((segKey, idx) => {
-    const segDef = SEGMENT_TYPES.find(s => s.key === segKey) || { label: segKey, sample: '?' };
+    const segDef = allSegs.find(s => s.key === segKey) || { label: segKey, sample: '?' };
     const chip = document.createElement('div');
     chip.className = 'segment-chip';
     chip.style.animationDelay = (idx * 0.05) + 's';
     chip.draggable = true; chip.dataset.index = idx; chip.dataset.key = segKey;
-    let value = segDef.sample;
+    let value = segDef.sample || segKey.toUpperCase();
     if (segKey === 'counter') value = String(tmpl.counter).padStart(3,'0');
     if (segKey === 'month') value = getMonthValue();
     if (segKey === 'year') value = new Date().getFullYear();
@@ -1242,7 +1659,7 @@ function onTemplateChange() {
   });
   const addSel = document.getElementById('segmentAddSelect');
   const used = new Set(tmpl.segments);
-  addSel.innerHTML = SEGMENT_TYPES.filter(s => !used.has(s.key)).map(s => `<option value="${s.key}">${s.label}</option>`).join('');
+  addSel.innerHTML = allSegs.filter(s => !used.has(s.key)).map(s => `<option value="${s.key}">${s.label}</option>`).join('');
   if (!addSel.innerHTML) addSel.innerHTML = '<option disabled>Tidak ada segmen tersisa</option>';
   updateSegmentPreview();
 }
@@ -1282,6 +1699,7 @@ function updateSegmentPreview() {
   preview.textContent = generatePreview(tmpl.segments, tmpl);
 }
 function generatePreview(segments, tmpl) {
+  const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
   const parts = segments.map(key => {
     if (key === 'counter') return String(tmpl.counter || 1).padStart(3,'0');
     if (key === 'month') return getMonthValue();
@@ -1290,6 +1708,8 @@ function generatePreview(segments, tmpl) {
     if (key === 'division') return (state.divisions[0] || {}).code || 'DIV';
     if (key === 'project') return (state.projects[0] || {}).code || 'PRO';
     if (key === 'type') return (state.segmentCodes.type || ['SRT'])[0];
+    const custom = allSegs.find(s => s.key === key);
+    if (custom) return custom.sample || key.toUpperCase();
     return key.toUpperCase();
   });
   return parts.join('/');
@@ -1336,6 +1756,7 @@ function saveDocument() {
   saveState(); navigate('archive');
 }
 function generateNumberFromSegments(tmpl) {
+  const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
   const parts = tmpl.segments.map(key => {
     if (key === 'counter') return String(tmpl.counter || 1).padStart(3,'0');
     if (key === 'month') return getMonthValue();
@@ -1344,6 +1765,8 @@ function generateNumberFromSegments(tmpl) {
     if (key === 'division') return (state.divisions[0] || {}).code || 'BAHP';
     if (key === 'project') return (state.projects[0] || {}).code || 'PRO';
     if (key === 'type') return (state.segmentCodes.type || ['SRT'])[0];
+    const custom = allSegs.find(s => s.key === key);
+    if (custom) return custom.sample || key.toUpperCase();
     return 'XXX';
   });
   return parts.join('/');
@@ -1529,69 +1952,232 @@ function switchMasterTab(tab, el) {
   state.masterTab = tab;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   if (el) el.classList.add('active');
-  else { const tabs = document.querySelectorAll('.tab'); const tabMap = ['segments','companies','projects','formats','templates']; const idx = tabMap.indexOf(tab); if (tabs[idx]) tabs[idx].classList.add('active'); }
+  else {
+    const tabs = document.querySelectorAll('.tab');
+    const tabMap = ['codes','formats','templates'];
+    const idx = tabMap.indexOf(tab);
+    if (tabs[idx]) tabs[idx].classList.add('active');
+    if (tab === 'template-builder') tabs.forEach(t => t.classList.remove('active'));
+  }
   renderMaster();
 }
 function renderMaster() {
   const container = document.getElementById('master-content');
   const tab = state.masterTab;
-  if (tab === 'segments') {
-    container.innerHTML = `<div class="section"><div class="section-header"><span class="section-title">Kelola Segmen Nomor Surat</span></div><p style="font-size:13px;color:var(--textSecondary);margin-bottom:16px">Pilih template untuk mengatur urutan segmen. Drag & drop chip untuk mengubah urutan.</p><div class="form-group"><label class="form-label">Pilih Template</label><select class="form-select" id="masterTemplateSelect" onchange="renderMasterSegments()"></select></div><div id="masterSegmentEditor"></div></div>`;
-    const sel = document.getElementById('masterTemplateSelect');
-    sel.innerHTML = state.templates.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
-    renderMasterSegments();
-  }
-  if (tab === 'companies') container.innerHTML = renderMasterList('Perusahaan', 'companies', 'code', 'name', 'Tambah Perusahaan');
-  if (tab === 'projects') container.innerHTML = renderMasterList('Proyek', 'projects', 'code', 'name', 'Tambah Proyek');
+  if (tab === 'codes') container.innerHTML = renderMasterCodes();
   if (tab === 'formats') container.innerHTML = `<div class="section"><div class="section-header"><span class="section-title">Format Penomoran Bulan</span></div><div class="master-list">${MONTH_FORMATS.map((f, i) => `<div class="master-item" style="animation-delay:${i*0.05}s"><div class="master-item-info"><div class="master-item-title">${f.name}</div><div class="master-item-sub">Contoh bulan ini: <b>${f.fn(new Date().getMonth())}</b></div></div><button class="btn btn-sm ${state.settings.monthFormat===f.id?'btn-accent':'btn-secondary'}" onclick="setMonthFormat('${f.id}')">${state.settings.monthFormat===f.id?'Aktif':'Pilih'}</button></div>`).join('')}</div></div>`;
-  if (tab === 'templates') container.innerHTML = `<div class="section"><div class="section-header"><span class="section-title">Kelola Template</span></div><div class="template-grid">${state.templates.map((t, i) => `<div class="template-card" style="animation-delay:${i*0.08}s"><div class="template-name">${t.name}</div><div class="template-desc">${t.desc}</div><div class="template-format">${t.format || generatePreview(t.segments, t)}</div><div style="margin-top:12px;display:flex;gap:8px"><button class="btn btn-sm btn-secondary" onclick="editTemplate('${t.id}')">Edit</button><button class="btn btn-sm btn-danger" onclick="deleteTemplate('${t.id}')">Hapus</button></div></div>`).join('')}</div><div style="margin-top:20px;padding:20px;background:var(--bg);border-radius:10px;border:1px dashed var(--borderStrong)"><h4 style="margin-bottom:12px;font-size:14px">Tambah Template Baru</h4><div class="form-row"><input type="text" class="form-input" id="newTmplName" placeholder="Nama template"><input type="text" class="form-input" id="newTmplDesc" placeholder="Deskripsi"></div><button class="btn btn-accent" style="margin-top:10px" onclick="addTemplate()">Tambah Template</button></div></div>`;
+  if (tab === 'templates') container.innerHTML = renderTemplateList();
+  if (tab === 'template-builder') container.innerHTML = renderTemplateBuilder();
 }
-function renderMasterSegments() {
-  const tid = document.getElementById('masterTemplateSelect').value;
-  const tmpl = state.templates.find(t => t.id === tid);
-  const editor = document.getElementById('masterSegmentEditor');
-  if (!tmpl || !editor) return;
-  editor.innerHTML = `<div style="margin-bottom:12px;font-size:13px;color:var(--textSecondary)">Urutan segmen saat ini:</div><div class="segment-list" id="masterSegList" ondragover="allowDrop(event)" ondrop="dropMaster(event)">${tmpl.segments.map((segKey, idx) => { const segDef = SEGMENT_TYPES.find(s => s.key === segKey) || { label: segKey }; return `<div class="segment-chip" draggable="true" data-index="${idx}" data-key="${segKey}" ondragstart="masterDragStart(${idx})" ondragend="masterDragEnd()" style="animation-delay:${idx*0.05}s"><span>${segDef.label}</span>${tmpl.segments.length > 2 ? `<button class="seg-remove" onclick="removeMasterSegment('${tid}', ${idx})">\u00d7</button>` : ''}</div>`; }).join('')}</div><div class="segment-preview">${generatePreview(tmpl.segments, tmpl)}</div><div style="margin-top:12px;display:flex;gap:8px"><select class="form-select" id="masterSegAdd" style="width:auto;flex:1">${SEGMENT_TYPES.filter(s => !tmpl.segments.includes(s.key)).map(s => `<option value="${s.key}">${s.label}</option>`).join('')}</select><button class="btn btn-secondary" onclick="addMasterSegment('${tid}')">Tambah Segmen</button></div>`;
+let builderState = { id: null, name: '', desc: '', counter: 1, segments: [] };
+
+function renderTemplateList() {
+  return `<div class="section"><div class="section-header"><span class="section-title">Template</span><button class="btn btn-primary" onclick="openTemplateBuilder()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Buat Template Baru</button></div><div class="template-grid">${state.templates.map((t, i) => `<div class="template-card" style="animation-delay:${i*0.08}s"><div class="template-name">${t.name}<span class="template-count" style="margin-left:8px;background:var(--accentLight);color:var(--accent)">#${t.counter || 1}</span></div><div class="template-desc">${t.desc}</div><div class="template-format">${t.format || generatePreview(t.segments, t)}</div><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-sm btn-secondary" onclick="editTemplateBuilder('${t.id}')">Edit</button><button class="btn btn-sm btn-danger" onclick="deleteTemplate('${t.id}')">Hapus</button></div></div>`).join('')}</div></div>`;
 }
-let masterDragIdx = null;
-function masterDragStart(idx) { masterDragIdx = idx; }
-function masterDragEnd() { masterDragIdx = null; }
-function dropMaster(e) {
+function openTemplateBuilder() {
+  builderState = { id: null, name: '', desc: '', counter: 1, segments: [{key:'counter',type:'counter',value:''},{key:'company',type:'company',value:'IPI'}] };
+  switchMasterTab('template-builder');
+}
+function editTemplateBuilder(id) {
+  const t = state.templates.find(x => x.id === id);
+  if (!t) return;
+  builderState = {
+    id: t.id, name: t.name, desc: t.desc || '', counter: t.counter || 1,
+    segments: t.segments.map(sk => {
+      const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
+      const segDef = allSegs.find(s => s.key === sk);
+      const isCustomText = ['company','division','project','type'].includes(sk);
+      return { key: sk, type: isCustomText ? 'custom-text' : sk, value: isCustomText ? (segDef?.sample || '') : '' };
+    })
+  };
+  switchMasterTab('template-builder');
+}
+function renderTemplateBuilder() {
+  const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
+  const usedKeys = new Set(builderState.segments.map(s => s.key));
+  const availableSegs = allSegs.filter(s => !usedKeys.has(s.key));
+  const previewNumber = generateBuilderPreview();
+  return `<div class="section" id="templateBuilderSection"><div class="section-header"><span class="section-title">${builderState.id ? 'Edit' : 'Buat'} Template</span><button class="btn btn-sm btn-secondary" onclick="switchMasterTab('templates')">Kembali</button></div><div class="template-builder-shortcuts"><span class="shortcut-badge"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> Simpan</span><span class="shortcut-badge"><kbd>Esc</kbd> Batal</span></div><div class="template-builder-layout"><div class="template-builder-panel"><div class="builder-heading">${builderState.id ? 'Edit Template' : 'Template Baru'}</div><div class="template-form-group"><label class="template-form-label">Nama Template</label><input type="text" class="form-input" id="builderName" placeholder="Contoh: Surat Keluar" value="${escapeHtml(builderState.name)}" oninput="updateBuilderName(this.value)"></div><div class="template-form-group"><label class="template-form-label">Deskripsi</label><input type="text" class="form-input" id="builderDesc" placeholder="Deskripsi singkat template" value="${escapeHtml(builderState.desc)}" oninput="updateBuilderDesc(this.value)"></div><div class="template-form-group"><label class="template-form-label">Index Awal (Nomor Pertama)</label><input type="number" class="form-input" id="builderCounter" placeholder="1" min="1" value="${builderState.counter}" oninput="updateBuilderCounter(this.value)"><p class="template-form-hint">Nomor pertama yang akan dihasilkan (misal: 102 &rarr; dokumen pertama = .../102)</p></div><div class="add-segment-row"><label class="template-form-label" style="margin:0">Format Segments</label>${availableSegs.length > 0 ? `<button class="add-segment-btn" onclick="addBuilderSegment()">+ Tambah Segment</button>` : ''}</div><div class="segment-builder-list" id="builderSegmentList">${builderState.segments.map((seg, idx) => renderBuilderSegmentItem(seg, idx)).join('')}</div><button class="builder-save-btn" onclick="saveBuilderTemplate()" id="builderSaveBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> ${builderState.id ? 'Simpan Perubahan' : 'Simpan Template'}</button></div><div class="template-preview-panel"><div class="preview-title">Pratinjau Format</div><p class="preview-subtitle">Nomor pertama yang akan dihasilkan:</p><div class="preview-box" id="builderPreviewBox">${previewNumber}</div><div class="preview-title">Struktur:</div><div class="structure-list" id="builderStructureList">${renderBuilderStructure()}</div></div></div></div>`;
+}
+function renderBuilderSegmentItem(seg, idx) {
+  const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
+  const segDef = allSegs.find(s => s.key === seg.key) || { label: seg.key, sample: '' };
+  const isCounter = seg.key === 'counter';
+  const isMonth = seg.key === 'month';
+  const isYear = seg.key === 'year';
+  const isCustomText = ['company','division','project','type'].includes(seg.key);
+  const isCustomSeg = state.customSegments.find(s => s.key === seg.key);
+  let selectLabel = segDef.label;
+  if (isCounter) selectLabel = 'Index Otomatis (' + String(builderState.counter).padStart(3,'0') + ')';
+  else if (isMonth) selectLabel = 'Bulan (MM)';
+  else if (isYear) selectLabel = 'Tahun (YYYY)';
+  else if (isCustomText || isCustomSeg) selectLabel = 'Teks Kustom (' + segDef.label + ')';
+  return `<div class="segment-builder-item" data-index="${idx}" draggable="true" ondragstart="builderDragStart(${idx},event)" ondragend="builderDragEnd()" ondragover="builderDragOver(event)" ondrop="builderDrop(${idx},event)" style="animation-delay:${idx*0.04}s" id="builderSeg${idx}"><div class="segment-grip"><div class="segment-grip-dot"></div><div class="segment-grip-dot"></div><div class="segment-grip-dot"></div><div class="segment-grip-dot"></div><div class="segment-grip-dot"></div><div class="segment-grip-dot"></div></div><span class="segment-separator">${idx === 0 ? '/' : '/'}</span><div class="segment-select-wrapper"><select class="form-input segment-type-select" onchange="updateBuilderSegmentType(${idx},this.value)" id="builderSegSelect${idx}">${allSegs.map(s => { const sIsCounter = s.key === 'counter'; const sIsMonth = s.key === 'month'; const sIsYear = s.key === 'year'; const sIsCustom = ['company','division','project','type'].includes(s.key) || state.customSegments.find(cs => cs.key === s.key); let label = s.label; if (sIsCounter) label = 'Index Otomatis (' + String(builderState.counter).padStart(3,'0') + ')'; else if (sIsMonth) label = 'Bulan (MM)'; else if (sIsYear) label = 'Tahun (YYYY)'; else if (sIsCustom) label = 'Teks Kustom (' + s.label + ')'; return `<option value="${s.key}" ${s.key === seg.key ? 'selected' : ''}>${label}</option>`; }).join('')}</select></div>${isCustomText ? `<input type="text" class="form-input segment-value-input" placeholder="${segDef.sample || ''}" value="${escapeHtml(seg.value || segDef.sample || '')}" oninput="updateBuilderSegmentValue(${idx},this.value)" id="builderSegValue${idx}">` : ''}<div class="segment-actions"><button class="segment-action-btn" onclick="moveBuilderSegment(${idx},-1)" title="Naik" ${idx === 0 ? 'disabled' : ''}><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button><button class="segment-action-btn" onclick="moveBuilderSegment(${idx},1)" title="Turun" ${idx === builderState.segments.length-1 ? 'disabled' : ''}><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><button class="segment-action-btn delete" onclick="removeBuilderSegment(${idx})" title="Hapus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div></div>`;
+}
+function renderBuilderStructure() {
+  const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
+  return builderState.segments.map((seg, idx) => {
+    const segDef = allSegs.find(s => s.key === seg.key) || { label: seg.key };
+    const isCounter = seg.key === 'counter';
+    const isMonth = seg.key === 'month';
+    const isYear = seg.key === 'year';
+    const isCustomText = ['company','division','project','type'].includes(seg.key);
+    const isCustomSeg = state.customSegments.find(s => s.key === seg.key);
+    let text = '';
+    if (idx === 0) {
+      if (isCounter) text = '(awal) + Index Otomatis (' + String(builderState.counter).padStart(3,'0') + ')';
+      else text = '(awal) + ' + segDef.label;
+    } else {
+      const sep = '"/' + '" + ';
+      if (isCounter) text = sep + 'Index Otomatis (' + String(builderState.counter).padStart(3,'0') + ')';
+      else if (isMonth) text = sep + 'Bulan (MM)';
+      else if (isYear) text = sep + 'Tahun (YYYY)';
+      else if (isCustomText || isCustomSeg) text = sep + 'Teks Kustom = "' + (seg.value || segDef.sample || '') + '"';
+      else text = sep + segDef.label;
+    }
+    return `<div class="structure-item" style="animation-delay:${idx*0.05}s"><div class="structure-num">${idx+1}</div><div><span class="structure-text">${text}</span></div></div>`;
+  }).join('');
+}
+function generateBuilderPreview() {
+  return builderState.segments.map((seg, idx) => {
+    const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
+    const segDef = allSegs.find(s => s.key === seg.key);
+    if (seg.key === 'counter') return String(builderState.counter).padStart(3,'0');
+    if (seg.key === 'month') { const fmt = MONTH_FORMATS.find(f => f.id === (state.settings.monthFormat || 'roman')); return fmt ? fmt.fn(new Date().getMonth()) : 'VI'; }
+    if (seg.key === 'year') return new Date().getFullYear();
+    if (['company','division','project','type'].includes(seg.key)) return seg.value || segDef?.sample || seg.key.toUpperCase();
+    return segDef?.sample || seg.key.toUpperCase();
+  }).join('/');
+}
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div'); div.textContent = text; return div.innerHTML;
+}
+
+// Builder actions
+function updateBuilderName(v) { builderState.name = v; }
+function updateBuilderDesc(v) { builderState.desc = v; }
+function updateBuilderCounter(v) { const n = parseInt(v); builderState.counter = isNaN(n) || n < 1 ? 1 : n; updateBuilderPreviewUI(); }
+function updateBuilderSegmentType(idx, newKey) {
+  const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
+  const segDef = allSegs.find(s => s.key === newKey);
+  builderState.segments[idx] = { key: newKey, type: newKey, value: segDef?.sample || '' };
+  refreshBuilderSegments();
+}
+function updateBuilderSegmentValue(idx, val) { builderState.segments[idx].value = val; updateBuilderPreviewUI(); }
+function removeBuilderSegment(idx) {
+  if (builderState.segments.length <= 2) { showToast('Minimal 2 segmen', 'warning'); return; }
+  builderState.segments.splice(idx, 1);
+  refreshBuilderSegments();
+}
+function moveBuilderSegment(idx, dir) {
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= builderState.segments.length) return;
+  [builderState.segments[idx], builderState.segments[newIdx]] = [builderState.segments[newIdx], builderState.segments[idx]];
+  refreshBuilderSegments();
+}
+function addBuilderSegment() {
+  const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
+  const usedKeys = new Set(builderState.segments.map(s => s.key));
+  const available = allSegs.filter(s => !usedKeys.has(s.key));
+  if (available.length === 0) { showToast('Semua segmen sudah digunakan', 'warning'); return; }
+  const seg = available[0];
+  builderState.segments.push({ key: seg.key, type: seg.key, value: seg.sample || '' });
+  refreshBuilderSegments();
+}
+function refreshBuilderSegments() {
+  const container = document.getElementById('builderSegmentList');
+  if (container) {
+    container.innerHTML = builderState.segments.map((seg, idx) => renderBuilderSegmentItem(seg, idx)).join('');
+  }
+  updateBuilderPreviewUI();
+  const addBtn = document.querySelector('.add-segment-btn');
+  const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
+  const usedKeys = new Set(builderState.segments.map(s => s.key));
+  const available = allSegs.filter(s => !usedKeys.has(s.key));
+  if (addBtn) addBtn.style.display = available.length > 0 ? '' : 'none';
+}
+function updateBuilderPreviewUI() {
+  const box = document.getElementById('builderPreviewBox');
+  const struct = document.getElementById('builderStructureList');
+  if (box) { box.style.animation = 'none'; box.offsetHeight; box.textContent = generateBuilderPreview(); box.style.animation = 'fadeInScale 0.3s ease-out'; }
+  if (struct) struct.innerHTML = renderBuilderStructure();
+}
+function saveBuilderTemplate() {
+  const name = builderState.name.trim();
+  if (!name) { shakeElement(document.getElementById('builderName')); showToast('Nama template wajib diisi', 'error'); return; }
+  const segmentKeys = builderState.segments.map(s => s.key);
+  const segValues = {};
+  builderState.segments.forEach(s => { if (s.value) segValues[s.key] = s.value; });
+  if (builderState.id) {
+    const t = state.templates.find(x => x.id === builderState.id);
+    t.name = name; t.desc = builderState.desc; t.counter = builderState.counter;
+    t.segments = segmentKeys; t.format = generateBuilderPreview();
+    showToast('Template diperbarui', 'success');
+  } else {
+    const id = 't' + Date.now();
+    state.templates.push({ id, name, desc: builderState.desc, segments: segmentKeys, counter: builderState.counter, format: generateBuilderPreview() });
+    showToast('Template "' + name + '" dibuat', 'success');
+    triggerConfetti({ count: 20, colors: ['#4A8B7F', '#5A9367', '#22C55E'] });
+  }
+  saveState(); switchMasterTab('templates');
+}
+function cancelBuilder() { switchMasterTab('templates'); }
+
+// Drag & drop for builder
+let builderDragIdx = null;
+function builderDragStart(idx, e) {
+  builderDragIdx = idx;
+  const el = document.getElementById('builderSeg' + idx);
+  if (el) el.classList.add('dragging');
+  if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';
+}
+function builderDragEnd() {
+  const el = document.querySelector('.segment-builder-item.dragging');
+  if (el) el.classList.remove('dragging');
+  builderDragIdx = null;
+}
+function builderDragOver(e) { e.preventDefault(); if (e.dataTransfer) e.dataTransfer.dropEffect = 'move'; }
+function builderDrop(targetIdx, e) {
   e.preventDefault();
-  if (masterDragIdx === null) return;
-  const tid = document.getElementById('masterTemplateSelect').value;
-  const tmpl = state.templates.find(t => t.id === tid);
-  const chips = [...document.querySelectorAll('#masterSegList .segment-chip')];
-  const target = chips.find(c => c.contains(e.target) || c === e.target.closest('.segment-chip'));
-  if (!target) return;
-  const targetIdx = parseInt(target.dataset.index);
-  if (targetIdx === masterDragIdx) return;
-  const [moved] = tmpl.segments.splice(masterDragIdx, 1);
-  tmpl.segments.splice(targetIdx, 0, moved);
-  saveState(); renderMasterSegments(); showToast('Urutan diperbarui', 'success');
+  if (builderDragIdx === null || builderDragIdx === targetIdx) return;
+  const [moved] = builderState.segments.splice(builderDragIdx, 1);
+  builderState.segments.splice(targetIdx, 0, moved);
+  refreshBuilderSegments();
 }
-function removeMasterSegment(tid, idx) {
-  const tmpl = state.templates.find(t => t.id === tid);
-  if (tmpl.segments.length <= 2) { showToast('Minimal 2 segmen', 'warning'); return; }
-  tmpl.segments.splice(idx, 1); saveState(); renderMasterSegments();
+
+function renderMasterCodes() {
+  return `<div class="section"><div class="section-header"><span class="section-title">Kode Referensi</span></div><p style="font-size:13px;color:var(--textSecondary);margin-bottom:16px">Kelola semua kode referensi yang digunakan di nomor surat. Kode ini muncul sebagai nilai default saat membuat dokumen.</p><div style="margin-bottom:20px;"><h4 style="font-size:13px;text-transform:uppercase;letter-spacing:0.5px;color:var(--textSecondary);margin-bottom:12px;">Perusahaan</h4>${renderCodeList('company', state.companies)}</div><div style="margin-bottom:20px;"><h4 style="font-size:13px;text-transform:uppercase;letter-spacing:0.5px;color:var(--textSecondary);margin-bottom:12px;">Divisi</h4>${renderCodeList('division', state.divisions)}</div><div style="margin-bottom:20px;"><h4 style="font-size:13px;text-transform:uppercase;letter-spacing:0.5px;color:var(--textSecondary);margin-bottom:12px;">Proyek</h4>${renderCodeList('project', state.projects)}</div><div style="margin-bottom:20px;"><h4 style="font-size:13px;text-transform:uppercase;letter-spacing:0.5px;color:var(--textSecondary);margin-bottom:12px;">Tipe Surat</h4>${renderCodeList('type', (state.segmentCodes.type || []).map(code => ({code, name: code})))}</div></div>`;
 }
-function addMasterSegment(tid) {
-  const tmpl = state.templates.find(t => t.id === tid);
-  const key = document.getElementById('masterSegAdd').value;
-  if (!key) return;
-  tmpl.segments.push(key); saveState(); renderMasterSegments(); showToast('Segmen ditambahkan', 'success');
+function renderCodeList(typeKey, items) {
+  return `<div class="master-list">${items.map((item, idx) => `<div class="master-item" style="animation-delay:${idx*0.05}s"><div class="master-item-info"><div class="master-item-title">${item.code}</div><div class="master-item-sub">${item.name || ''}</div></div><div style="display:flex;gap:6px"><button class="action-btn" onclick="editMasterCode('${typeKey}', ${idx})" data-tooltip="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="action-btn delete" onclick="removeMasterCode('${typeKey}', ${idx})" data-tooltip="Hapus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></div></div>`).join('')}</div>`;
 }
-function renderMasterList(title, key, codeField, nameField, btnLabel) {
-  const items = state[key] || [];
-  return `<div class="section"><div class="section-header"><span class="section-title">Kelola ${title}</span></div><div class="master-list">${items.map((item, idx) => `<div class="master-item" style="animation-delay:${idx*0.05}s"><div class="master-item-info"><div class="master-item-title">${item[codeField]} \u2014 ${item[nameField]}</div></div><button class="action-btn delete" onclick="removeMasterItem('${key}', ${idx})" data-tooltip="Hapus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></div>`).join('')}</div><div style="margin-top:16px;display:flex;gap:8px"><input type="text" class="form-input" id="new${key}Code" placeholder="Kode (contoh: IPI)" style="flex:1"><input type="text" class="form-input" id="new${key}Name" placeholder="Nama lengkap" style="flex:2"><button class="btn btn-secondary" onclick="addMasterItem('${key}', '${codeField}', '${nameField}')">${btnLabel}</button></div></div>`;
+function editMasterCode(typeKey, idx) {
+  let item;
+  if (typeKey === 'type') { const codes = state.segmentCodes.type || []; item = { code: codes[idx], name: codes[idx] }; }
+  else if (typeKey === 'company') item = state.companies[idx];
+  else if (typeKey === 'division') item = state.divisions[idx];
+  else if (typeKey === 'project') item = state.projects[idx];
+  if (!item) return;
+  const newCode = prompt('Kode baru:', item.code);
+  if (newCode === null || newCode.trim() === '') return;
+  const newName = prompt('Nama baru:', item.name || item.code);
+  if (newName === null) return;
+  item.code = newCode.trim();
+  item.name = newName.trim();
+  if (typeKey === 'type') { state.segmentCodes.type[idx] = newCode.trim(); }
+  saveState(); renderMaster();
+  showToast('Kode diperbarui', 'success');
 }
-function addMasterItem(key, codeField, nameField) {
-  const code = document.getElementById('new'+key+'Code').value.trim();
-  const name = document.getElementById('new'+key+'Name').value.trim();
-  if (!code || !name) { shakeElement(document.getElementById('new'+key+'Code')); showToast('Kode dan nama wajib diisi', 'error'); return; }
-  state[key].push({ [codeField]: code, [nameField]: name }); saveState(); renderMaster(); showToast('Data ditambahkan', 'success');
+function removeMasterCode(typeKey, idx) {
+  if (!confirm('Yakin hapus kode ini?')) return;
+  if (typeKey === 'type') { (state.segmentCodes.type || []).splice(idx, 1); }
+  else if (typeKey === 'company') state.companies.splice(idx, 1);
+  else if (typeKey === 'division') state.divisions.splice(idx, 1);
+  else if (typeKey === 'project') state.projects.splice(idx, 1);
+  saveState(); renderMaster();
+  showToast('Kode dihapus', 'info');
 }
-function removeMasterItem(key, idx) { state[key].splice(idx, 1); saveState(); renderMaster(); showToast('Data dihapus', 'info'); }
 function setMonthFormat(id) { state.settings.monthFormat = id; saveState(); renderMaster(); showToast('Format bulan diperbarui', 'success'); }
 function editTemplate(id) {
   const t = state.templates.find(x => x.id === id);
@@ -1600,7 +2186,23 @@ function editTemplate(id) {
   if (name === null) return;
   const desc = prompt('Deskripsi:', t.desc);
   if (desc === null) return;
-  t.name = name || t.name; t.desc = desc || t.desc; saveState(); renderMaster(); showToast('Template diperbarui', 'success');
+  const counterStr = prompt('Nilai counter saat ini:', t.counter || 1);
+  if (counterStr === null) return;
+  const counter = parseInt(counterStr);
+  t.name = name || t.name; t.desc = desc || t.desc;
+  if (!isNaN(counter) && counter >= 1) t.counter = counter;
+  saveState(); renderMaster(); showToast('Template diperbarui', 'success');
+}
+function editTemplateCounter(id) {
+  const t = state.templates.find(x => x.id === id);
+  if (!t) return;
+  const counterStr = prompt('Set counter untuk "' + t.name + '" (nomor berikutnya yang akan digunakan):', t.counter || 1);
+  if (counterStr === null || counterStr.trim() === '') return;
+  const counter = parseInt(counterStr);
+  if (isNaN(counter) || counter < 1) { showToast('Counter harus angka positif', 'error'); return; }
+  t.counter = counter;
+  saveState(); renderMaster();
+  showToast('Counter "' + t.name + '" di-set ke ' + counter, 'success');
 }
 function deleteTemplate(id) {
   if (!confirm('Yakin hapus template? Dokumen existing tetap ada.')) return;
@@ -1609,10 +2211,16 @@ function deleteTemplate(id) {
 function addTemplate() {
   const name = document.getElementById('newTmplName').value.trim();
   const desc = document.getElementById('newTmplDesc').value.trim();
+  const counterVal = parseInt(document.getElementById('newTmplCounter').value);
   if (!name) { shakeElement(document.getElementById('newTmplName')); showToast('Nama template wajib diisi', 'error'); return; }
   const id = 't' + Date.now();
-  state.templates.push({ id, name, desc, segments: ['counter','company','month','year'], counter: 1, format: '' });
-  saveState(); renderMaster(); showToast('Template dibuat', 'success');
+  const startCounter = !isNaN(counterVal) && counterVal >= 1 ? counterVal : 1;
+  state.templates.push({ id, name, desc, segments: ['counter','company','month','year'], counter: startCounter, format: '' });
+  document.getElementById('newTmplName').value = '';
+  document.getElementById('newTmplDesc').value = '';
+  document.getElementById('newTmplCounter').value = '1';
+  saveState(); renderMaster();
+  showToast('Template "' + name + '" dibuat dengan start counter ' + startCounter, 'success');
 }
 
 // ===================== SETTINGS =====================
