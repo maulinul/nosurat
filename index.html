@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0035)https://maulinul.github.io/nosurat/ -->
+<html lang="id" style="--bg: #F8FAFC; --surface: #FFFFFF; --primary: #334155; --accent: #64748B; --textPrimary: #0F172A;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LetterLog - Document Tracker Pro</title>
 <style>
-  :root {
-    --bg: #F7F5F0; --surface: #FFFFFF; --surfaceHover: #F0EDE6; --textPrimary: #1E1B18; --textSecondary: #6B6560;
-    --textMuted: #A39E97; --textInverse: #FFFFFF; --primary: #2C2825; --primaryHover: #3D3834; --primaryLight: #E8E4DE;
-    --accent: #4A8B7F; --accentHover: #3D756B; --accentLight: #E4F0ED; --accentRing: rgba(74, 139, 127, 0.25);
-    --success: #5A9367; --successBg: #E8F5EA; --warning: #C4943A; --warningBg: #FDF3E0; --error: #B05555; --errorBg: #FCE8E8;
-    --info: #5B7BA3; --infoBg: #E8EEF5; --border: #E0DCD5; --borderStrong: #CFC9C0; --inputBg: #FFFFFF; --inputBorder: #D5D0C9;
-    --tagBg: #ECE8E1; --tagText: #7A746D; --divider: #EAE6DF; --shadow: rgba(30, 27, 24, 0.06); --shadowHover: rgba(30, 27, 24, 0.12);
-    --overlay: rgba(30, 27, 24, 0.30); --radius: 12px; --sidebarWidth: 260px;
+    :root {
+    --bg: #F5F0E8; --sidebar: #EDE5D5; --surface: #FFFDF9; --surfaceHover: #F5F0E8;
+    --textPrimary: #3D3226; --textSecondary: #7A6B5D; --textMuted: #A39E97; --textInverse: #FFFFFF;
+    --primary: #8B6F47; --primaryHover: #A68B5B; --primaryLight: rgba(139,111,71,0.12);
+    --accent: #6B8F71; --accentHover: #A68B5B; --accentLight: rgba(107,143,113,0.12); --accentRing: rgba(107,143,113,0.25);
+    --success: #A8C5A0; --successBg: rgba(168,197,160,0.15); --warning: #C4943A; --warningBg: #FDF3E0;
+    --error: #B05555; --errorBg: #FCE8E8; --info: #5B7BA3; --infoBg: #E8EEF5;
+    --border: #D4C9B8; --borderStrong: #CFC0A8; --inputBg: #FFFDF9; --inputBorder: #D4C9B8;
+    --tagBg: rgba(212,201,184,0.35); --tagText: #7A6B5D; --divider: #D4C9B8;
+    --shadow: rgba(61,50,38,0.06); --shadowHover: rgba(61,50,38,0.12); --overlay: rgba(61,50,38,0.30);
+    --radius: 12px; --sidebarWidth: 260px;
   }
   .dark {
-    --bg: #1E1B18; --surface: #2C2825; --surfaceHover: #3D3834; --textPrimary: #F7F5F0; --textSecondary: #B8B2A8;
-    --textMuted: #8A847A; --primary: #E8E4DE; --primaryHover: #FFFFFF; --primaryLight: #3D3834; --accent: #6BB8A8;
-    --accentHover: #8FCCC0; --accentLight: #2A4A42; --success: #7AB883; --successBg: #2A4A2E; --warning: #D4A85A;
-    --warningBg: #4A3A1E; --error: #D47A7A; --errorBg: #4A2A2A; --info: #7A9BC0; --infoBg: #2A3A4A; --border: #3D3834;
-    --borderStrong: #5A544A; --inputBg: #3D3834; --inputBorder: #5A544A; --tagBg: #3D3834; --tagText: #B8B2A8;
-    --divider: #3D3834; --shadow: rgba(0,0,0,0.20); --shadowHover: rgba(0,0,0,0.30);
+    --bg: #1A1D23; --sidebar: #22262E; --surface: #2A2F3A; --surfaceHover: #353B48;
+    --textPrimary: #E8EAF0; --textSecondary: #9CA3AF; --textMuted: #6B7280; --textInverse: #1A1D23;
+    --primary: #7C6FE0; --primaryHover: #9B8FEF; --primaryLight: rgba(124,111,224,0.15);
+    --accent: #7C6FE0; --accentHover: #9B8FEF; --accentLight: rgba(124,111,224,0.15); --accentRing: rgba(124,111,224,0.30);
+    --success: #4ADE80; --successBg: rgba(74,222,128,0.12); --warning: #D4A85A; --warningBg: #4A3A1E;
+    --error: #D47A7A; --errorBg: #4A2A2A; --info: #7A9BC0; --infoBg: #2A3A4A;
+    --border: #3D4250; --borderStrong: #4B5160; --inputBg: #2A2F3A; --inputBorder: #3D4250;
+    --tagBg: rgba(61,66,80,0.5); --tagText: #9CA3AF; --divider: #3D4250;
+    --shadow: rgba(0,0,0,0.25); --shadowHover: rgba(0,0,0,0.35); --overlay: rgba(0,0,0,0.50);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: var(--bg); color: var(--textPrimary); transition: background 0.5s cubic-bezier(0.4,0,0.2,1), color 0.5s cubic-bezier(0.4,0,0.2,1); overflow-x: hidden; }
@@ -48,6 +54,18 @@
   @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
   @keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
   @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  
+  /* Collapsible sections using native <details> */
+  .collapsible-section { margin-bottom: 16px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+  .collapsible-summary { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; cursor: pointer; background: var(--surface); border-bottom: 1px solid transparent; transition: all 0.3s; user-select: none; list-style: none; }
+  .collapsible-summary::-webkit-details-marker { display: none; }
+  .collapsible-summary:hover { background: var(--surfaceHover); }
+  .collapsible-summary::after { content: '\25B2'; font-size: 10px; color: var(--textMuted); transition: transform 0.3s; margin-left: auto; }
+  .collapsible-section[open] .collapsible-summary { border-bottom-color: var(--border); }
+  .collapsible-section[open] .collapsible-summary::after { content: '\25BC'; }
+  .collapsible-title { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--textSecondary); }
+  .collapsible-content { padding: 20px; }
+
   @keyframes softPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(74,139,127,0.4); } 50% { box-shadow: 0 0 0 8px rgba(74,139,127,0); } }
   @keyframes inputGlow { 0% { box-shadow: 0 0 0 0 var(--accentRing); } 50% { box-shadow: 0 0 0 6px var(--accentRing); } 100% { box-shadow: 0 0 0 3px var(--accentRing); } }
   @keyframes countUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -103,7 +121,7 @@
 
   /* ===== LAYOUT ===== */
   .app { display: flex; min-height: 100vh; }
-  .sidebar { width: var(--sidebarWidth); background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 50; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .sidebar { width: var(--sidebarWidth); background: var(--sidebar); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 50; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
   .sidebar::after { content: ''; position: absolute; top: 0; right: 0; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, var(--accent), transparent); opacity: 0; transition: opacity 0.4s; }
   .sidebar:hover::after { opacity: 0.3; }
   .main { flex: 1; margin-left: var(--sidebarWidth); min-height: 100vh; transition: margin 0.4s cubic-bezier(0.4,0,0.2,1); }
@@ -123,7 +141,7 @@
   .nav-item:nth-child(5) { animation-delay: 0.25s; }
   .nav-item::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%) scaleY(0); width: 3px; height: 20px; background: var(--accent); border-radius: 0 4px 4px 0; transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); }
   .nav-item:hover { background: var(--surfaceHover); color: var(--textPrimary); transform: translateX(4px); box-shadow: 0 2px 8px var(--shadow); }
-  .nav-item.active { background: var(--primaryLight); color: var(--primary); font-weight: 600; animation: softPulse 2s ease-in-out infinite; }
+  .nav-item.active { background: var(--accentLight); color: var(--accent); font-weight: 600; }
   .nav-item.active::before { transform: translateY(-50%) scaleY(1); animation: navIndicatorIn 0.3s cubic-bezier(0.4,0,0.2,1); }
   .nav-item:active { transform: translateX(4px) scale(0.97); }
   .nav-icon { width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.3s; }
@@ -218,7 +236,7 @@
   .stat-card:nth-child(5) { animation-delay: 0.4s; }
   .stat-card:nth-child(6) { animation-delay: 0.5s; }
   .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px var(--shadowHover); }
-  .stat-card.dark-card { background: var(--primary); color: var(--textInverse); border-color: var(--primary); }
+  .stat-card.dark-card { background: var(--primaryLight); color: var(--textPrimary); border-color: var(--borderStrong); }
   .stat-card.success-card { background: var(--successBg); border-color: rgba(90,147,103,0.2); }
   .stat-card.accent-card { background: var(--accentLight); border-color: rgba(74,139,127,0.2); }
   .stat-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
@@ -501,7 +519,7 @@
 
   /* ===== MOUSE TRAIL SELECTOR ===== */
   .trail-option-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .trail-option-card { padding: 16px; border-radius: 10px; border: 2px solid var(--border); cursor: pointer; text-align: center; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); background: var(--bg); position: relative; overflow: hidden; }
+  .trail-option-card { padding: 16px; border-radius: 10px; border: 2px solid var(--border); cursor: pointer; text-align: center; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); background: var(--surface); position: relative; overflow: hidden; }
   .trail-option-card:hover { border-color: var(--accentHover); transform: translateY(-3px); box-shadow: 0 8px 24px var(--shadowHover); }
   .trail-option-card.active { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accentRing); background: var(--accentLight); }
   .trail-preview { width: 60px; height: 60px; margin: 0 auto 10px; border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; }
@@ -852,52 +870,53 @@
     transform: translateY(0);
   }
 </style>
-<base target="_blank">
+<!--<base target="_blank">--><base href="." target="_blank">
+<style id="custom-theme-style"></style><base target="_blank">
 </head>
 <body>
 
 <!-- Scroll Progress Indicator -->
-<div class="scroll-indicator" id="scrollIndicator"></div>
+<div class="scroll-indicator" id="scrollIndicator" style="width: 0%;"></div>
 
 <!-- Confetti Container -->
 <div class="confetti-container" id="confettiContainer"></div>
 
 <!-- Mouse Trail Canvas -->
-<canvas class="mouse-trail-canvas" id="mouseTrailCanvas"></canvas>
+<canvas class="mouse-trail-canvas" id="mouseTrailCanvas" style="display: none;"></canvas>
 
 <div class="app">
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="brand">
         <div class="brand-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
         </div>
         LetterLog
       </div>
     </div>
     <nav class="nav">
-      <button class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+      <button class="nav-item entry-fade active" data-page="dashboard" onclick="navigate(&#39;dashboard&#39;)" style="animation-delay: 0.05s;">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg>
         Dashboard
         <span class="nav-shortcut">Alt+D</span>
       </button>
-      <button class="nav-item" data-page="master" onclick="navigate('master')">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+      <button class="nav-item entry-fade" data-page="master" onclick="navigate(&#39;master&#39;)" style="animation-delay: 0.1s;">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
         Master Data
         <span class="nav-shortcut">Alt+M</span>
       </button>
-      <button class="nav-item" data-page="create" onclick="navigate('create')">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      <button class="nav-item entry-fade" data-page="create" onclick="navigate(&#39;create&#39;)" style="animation-delay: 0.15s;">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
         Buat Dokumen
         <span class="nav-shortcut">Alt+B</span>
       </button>
-      <button class="nav-item" data-page="archive" onclick="navigate('archive')">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <button class="nav-item entry-fade" data-page="archive" onclick="navigate(&#39;archive&#39;)" style="animation-delay: 0.2s;">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         Arsip
         <span class="nav-shortcut">Alt+A</span>
       </button>
-      <button class="nav-item" data-page="settings" onclick="navigate('settings')">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <button class="nav-item entry-fade" data-page="settings" onclick="navigate(&#39;settings&#39;)" style="animation-delay: 0.25s;">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
         Pengaturan
         <span class="nav-shortcut">Alt+P</span>
       </button>
@@ -906,16 +925,16 @@
     <!-- Beyond Links Dropdown -->
     <div class="ql-wrap">
       <button class="ql-trigger" id="qlTrigger" onclick="toggleQuickLinks(event)">
-        <svg class="ql-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/><line x1="12" y1="2" x2="12" y2="22" opacity="0.3" stroke-dasharray="2 3"/></svg>
+        <svg class="ql-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle><line x1="12" y1="2" x2="12" y2="22" opacity="0.3" stroke-dasharray="2 3"></line></svg>
         <span>Beyond Links</span>
-        <svg class="ql-arrow" id="qlArrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg class="ql-arrow" id="qlArrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </button>
-      <div class="ql-panel" id="qlPanel"></div>
+      <div class="ql-panel" id="qlPanel"><a href="https://maulinul.github.io/masterweb/" target="_blank" rel="noopener" class="ql-item"><span class="ql-item-title">Main Menu</span><span class="ql-item-url">https://maulinul.github.io/masterweb/</span></a><div class="ql-divider"></div><a href="https://maulinul.github.io/dailyloggweh/" target="_blank" rel="noopener" class="ql-item"><span class="ql-item-title">Daily Log</span><span class="ql-item-url">https://maulinul.github.io/dailyloggweh/</span></a><div class="ql-divider"></div><a href="https://maulinul.github.io/nosurat/" target="_blank" rel="noopener" class="ql-item"><span class="ql-item-title">No Surat</span><span class="ql-item-url">https://maulinul.github.io/nosurat/</span></a><div class="ql-divider"></div><a href="https://maulinul.github.io/prompt2/" target="_blank" rel="noopener" class="ql-item"><span class="ql-item-title">Prompt Library</span><span class="ql-item-url">https://maulinul.github.io/prompt2/</span></a></div>
     </div>
 
     <div class="sidebar-footer">
       <button class="theme-toggle" onclick="toggleTheme()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>
         <span id="themeLabel">Mode Terang</span>
       </button>
       <div class="sync-status">
@@ -929,48 +948,49 @@
     <div class="container">
 
       <!-- DASHBOARD -->
-      <div id="page-dashboard" class="page">
+      <div id="page-dashboard" class="page" style="">
         <div class="page-header">
           <div class="page-title">
             <h1>Dashboard</h1>
             <p>Ringkasan aktivitas dokumen Anda</p>
           </div>
-          <button class="btn btn-primary" onclick="navigate('create')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <button class="btn btn-primary" onclick="navigate(&#39;create&#39;)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             Buat Dokumen
           </button>
         </div>
-        <div class="stats-grid" id="dashboardStats"></div>
+        <div class="stats-grid" id="dashboardStats">
+    <div class="stat-card dark-card"><div class="stat-header"><span class="stat-label" style="color:var(--textInverse);opacity:.8">Total Dokumen</span><div class="stat-icon" style="background:rgba(255,255,255,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div></div><div class="stat-value" style="color:var(--textInverse)">0</div></div>
+    <div class="stat-card success-card"><div class="stat-header"><span class="stat-label" style="color:var(--success)">Hari Ini</span><div class="stat-icon" style="background:var(--surface)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div></div><div class="stat-value" style="color:var(--success)">0</div></div>
+    <div class="stat-card accent-card"><div class="stat-header"><span class="stat-label" style="color:var(--accent)">Bulan Ini</span><div class="stat-icon" style="background:var(--surface)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div></div><div class="stat-value" style="color:var(--accent)">0</div></div></div>
         <div class="section">
           <div class="section-header">
             <span class="section-title">Template Tersedia</span>
-            <button class="btn btn-sm btn-secondary" onclick="navigate('master')">Kelola</button>
+            <button class="btn btn-sm btn-secondary" onclick="navigate(&#39;master&#39;)">Kelola</button>
           </div>
-          <div class="template-grid" id="dashboardTemplates"></div>
+          <div class="template-grid" id="dashboardTemplates"><div class="template-card" onclick="quickCreate(&#39;t1&#39;)" style="animation-delay:0s"><div class="template-header"><span class="template-count">0 dokumen</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div><div class="template-name">Progres MBG</div><div class="template-desc">Dokumen untuk mencatat progress MBG pekerjaan lapangan</div><div class="template-format">291/IPI/BAHP/MBG/{month}/{year}</div></div><div class="template-card" onclick="quickCreate(&#39;t2&#39;)" style="animation-delay:0.08s"><div class="template-header"><span class="template-count">0 dokumen</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div><div class="template-name">Progres Sunbiz</div><div class="template-desc">Dokumen untuk mencatat progress Sunbiz pekerjaan lapangan</div><div class="template-format">291/IPI/BAHP/SBIZ/{month}/{year}</div></div><div class="template-card" onclick="quickCreate(&#39;t3&#39;)" style="animation-delay:0.16s"><div class="template-header"><span class="template-count">0 dokumen</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div><div class="template-name">Surat Keluar</div><div class="template-desc">Untuk penomoran surat-surat penting</div><div class="template-format">001/SRT/SBIZ/{month}/{year}</div></div><div class="template-card" onclick="quickCreate(&#39;t4&#39;)" style="animation-delay:0.24s"><div class="template-header"><span class="template-count">0 dokumen</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div><div class="template-name">SPM</div><div class="template-desc">Permintaan pembelian barang</div><div class="template-format">334/SPM-PROJECT/IPI/{month}/{year}</div></div><div class="template-card" onclick="quickCreate(&#39;t1780968488486&#39;)" style="animation-delay:0.32s"><div class="template-header"><span class="template-count">0 dokumen</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div><div class="template-name">BA Progres Sunbiz</div><div class="template-desc">Progres IPI sunbiz</div><div class="template-format">001/IPI/VI/2026/MBG</div></div></div>
         </div>
         <div class="section">
           <div class="section-header">
             <span class="section-title">Aktivitas Terbaru</span>
-            <button class="btn btn-sm btn-secondary" onclick="navigate('archive')">Lihat Semua</button>
+            <button class="btn btn-sm btn-secondary" onclick="navigate(&#39;archive&#39;)">Lihat Semua</button>
           </div>
-          <div id="dashboardActivity"></div>
+          <div id="dashboardActivity"><div class="empty">Belum ada aktivitas</div></div>
         </div>
       </div>
 
       <!-- MASTER DATA -->
-      <div id="page-master" class="page hidden">
+      <div id="page-master" class="page hidden" style="">
         <div class="page-header">
           <div class="page-title">
             <h1>Master Data</h1>
             <p>Kelola segmen, perusahaan, proyek, dan format</p>
           </div>
         </div>
-        <div class="tabs">
-          <button class="tab active" onclick="switchMasterTab('codes', this)">Kode Referensi</button>
-          <button class="tab" onclick="switchMasterTab('formats', this)">Format Bulan/Tahun</button>
-          <button class="tab" onclick="switchMasterTab('templates', this)">Template</button>
+        <div class="tabs" style="display:none;">
+          <button class="tab active" onclick="switchMasterTab(&#39;templates&#39;, this)">Template</button>
         </div>
-        <div id="master-content"></div>
+        <div id="master-content"><div class="section"><div class="section-header"><span class="section-title">Template</span><button class="btn btn-primary" onclick="openTemplateBuilder()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Buat Template Baru</button></div><div class="template-grid"><div class="template-card" style="animation-delay:0s"><div class="template-name">Progres MBG<span class="template-count" style="margin-left:8px;background:var(--accentLight);color:var(--accent)">#292</span></div><div class="template-desc">Dokumen untuk mencatat progress MBG pekerjaan lapangan</div><div class="template-format">291/IPI/BAHP/MBG/{month}/{year}</div><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-sm btn-secondary" onclick="editTemplateBuilder(&#39;t1&#39;)">Edit</button><button class="btn btn-sm btn-danger" onclick="deleteTemplate(&#39;t1&#39;)">Hapus</button></div></div><div class="template-card" style="animation-delay:0.08s"><div class="template-name">Progres Sunbiz<span class="template-count" style="margin-left:8px;background:var(--accentLight);color:var(--accent)">#292</span></div><div class="template-desc">Dokumen untuk mencatat progress Sunbiz pekerjaan lapangan</div><div class="template-format">291/IPI/BAHP/SBIZ/{month}/{year}</div><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-sm btn-secondary" onclick="editTemplateBuilder(&#39;t2&#39;)">Edit</button><button class="btn btn-sm btn-danger" onclick="deleteTemplate(&#39;t2&#39;)">Hapus</button></div></div><div class="template-card" style="animation-delay:0.16s"><div class="template-name">Surat Keluar<span class="template-count" style="margin-left:8px;background:var(--accentLight);color:var(--accent)">#1</span></div><div class="template-desc">Untuk penomoran surat-surat penting</div><div class="template-format">001/SRT/SBIZ/{month}/{year}</div><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-sm btn-secondary" onclick="editTemplateBuilder(&#39;t3&#39;)">Edit</button><button class="btn btn-sm btn-danger" onclick="deleteTemplate(&#39;t3&#39;)">Hapus</button></div></div><div class="template-card" style="animation-delay:0.24s"><div class="template-name">SPM<span class="template-count" style="margin-left:8px;background:var(--accentLight);color:var(--accent)">#334</span></div><div class="template-desc">Permintaan pembelian barang</div><div class="template-format">334/SPM-PROJECT/IPI/{month}/{year}</div><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-sm btn-secondary" onclick="editTemplateBuilder(&#39;t4&#39;)">Edit</button><button class="btn btn-sm btn-danger" onclick="deleteTemplate(&#39;t4&#39;)">Hapus</button></div></div><div class="template-card" style="animation-delay:0.32s"><div class="template-name">BA Progres Sunbiz<span class="template-count" style="margin-left:8px;background:var(--accentLight);color:var(--accent)">#1</span></div><div class="template-desc">Progres IPI sunbiz</div><div class="template-format">001/IPI/VI/2026/MBG</div><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-sm btn-secondary" onclick="editTemplateBuilder(&#39;t1780968488486&#39;)">Edit</button><button class="btn btn-sm btn-danger" onclick="deleteTemplate(&#39;t1780968488486&#39;)">Hapus</button></div></div></div></div></div>
       </div>
 
       <!-- CREATE DOCUMENT -->
@@ -993,15 +1013,8 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Nomor Surat (Drag & Drop segmen untuk mengubah urutan)</label>
-            <div class="segment-builder">
-              <div class="segment-list" id="segmentList" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
-              <div class="segment-preview" id="segmentPreview">-</div>
-              <div class="segment-add">
-                <select class="form-select" id="segmentAddSelect" style="width: auto; flex: 1;"></select>
-                <button class="btn btn-sm btn-secondary" onclick="addSegment()">Tambah</button>
-              </div>
-            </div>
+            <label class="form-label">Nomor Surat</label>
+            <div class="segment-preview" id="segmentPreview" style="font-size: 20px; padding: 18px;">-</div>
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -1018,9 +1031,9 @@
             <textarea class="form-textarea" id="docDesc" placeholder="Deskripsikan detail dokumen, nilai kontrak, progress, dll..."></textarea>
           </div>
           <div class="form-row" style="margin-top: 8px;">
-            <button class="btn btn-secondary" onclick="navigate('archive')">Batal</button>
+            <button class="btn btn-secondary" onclick="navigate(&#39;archive&#39;)">Batal</button>
             <button class="btn btn-primary" onclick="saveDocument()" id="btnSaveDoc">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
               Simpan Dokumen
             </button>
           </div>
@@ -1031,7 +1044,7 @@
       </div>
 
       <!-- ARCHIVE -->
-      <div id="page-archive" class="page hidden">
+      <div id="page-archive" class="page hidden" style="">
         <div class="page-header">
           <div class="page-title">
             <h1>Arsip Dokumen</h1>
@@ -1052,11 +1065,11 @@
             </div>
             <div class="filter-group">
               <label>Tipe</label>
-              <select class="form-select" id="filterType" onchange="renderArchive()"><option value="">Semua Tipe</option></select>
+              <select class="form-select" id="filterType" onchange="renderArchive()" data-populated="true"><option value="">Semua Tipe</option><option value="t1">Progres MBG</option><option value="t2">Progres Sunbiz</option><option value="t3">Surat Keluar</option><option value="t4">SPM</option><option value="t1780968488486">BA Progres Sunbiz</option></select>
             </div>
             <div class="filter-group">
               <label>Status</label>
-              <select class="form-select" id="filterStatus" onchange="renderArchive()"><option value="">Semua Status</option></select>
+              <select class="form-select" id="filterStatus" onchange="renderArchive()" data-populated="true"><option value="">Semua Status</option><option value="Draft">Draft</option><option value="Review">Review</option><option value="Sent">Sent</option><option value="Received">Received</option><option value="Archived">Archived</option></select>
             </div>
             <div class="filter-group">
               <label>Dari Tanggal</label>
@@ -1090,7 +1103,7 @@
                   <th style="text-align:right">Aksi</th>
                 </tr>
               </thead>
-              <tbody id="archiveTable"></tbody>
+              <tbody id="archiveTable"><tr><td colspan="7" class="empty">Tidak ada dokumen ditemukan</td></tr></tbody>
             </table>
           </div>
           <div class="pagination" id="archivePagination"></div>
@@ -1107,28 +1120,32 @@
         </div>
 
         <!-- Mouse Trail Section -->
-        <div class="section">
-          <h3 style="margin-bottom: 16px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--textSecondary);">Efek Jejak Kursor</h3>
+        <details class="collapsible-section" id="collapse-mouse-trail" open>
+          <summary class="collapsible-summary">
+            <span class="collapsible-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg> Efek Jejak Kursor</span>
+          </summary>
+          <div class="collapsible-content">
+          <div style="padding-bottom: 4px;">
           <p style="font-size: 13px; color: var(--textSecondary); margin-bottom: 16px;">Pilih efek visual yang mengikuti pergerakan kursor Anda di seluruh aplikasi.</p>
           <div class="trail-option-grid">
-            <div class="trail-option-card ${state?.settings?.mouseTrail === 'none' || !state?.settings?.mouseTrail ? 'active' : ''}" id="trailCardNone" onclick="setMouseTrail('none')">
+            <div class="trail-option-card ${state?.settings?.mouseTrail === &#39;none&#39; || !state?.settings?.mouseTrail ? &#39;active&#39; : &#39;&#39;}" id="trailCardNone" onclick="setMouseTrail(&#39;none&#39;)">
               <div class="trail-preview" style="background: var(--border);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
               </div>
               <div class="trail-option-name">Nonaktif</div>
               <div class="trail-option-desc">Tidak ada efek</div>
             </div>
-            <div class="trail-option-card" id="trailCardGlow" onclick="setMouseTrail('glow')">
+            <div class="trail-option-card" id="trailCardGlow" onclick="setMouseTrail(&#39;glow&#39;)">
               <div class="trail-preview trail-preview-glow"></div>
               <div class="trail-option-name">Glow Dots</div>
               <div class="trail-option-desc">Titik-titik halus memudar</div>
             </div>
-            <div class="trail-option-card" id="trailCardSparkle" onclick="setMouseTrail('sparkle')">
+            <div class="trail-option-card active" id="trailCardSparkle" onclick="setMouseTrail(&#39;sparkle&#39;)">
               <div class="trail-preview trail-preview-sparkle"></div>
               <div class="trail-option-name">Sparkle</div>
               <div class="trail-option-desc">Partikel berkilau</div>
             </div>
-            <div class="trail-option-card" id="trailCardConstellation" onclick="setMouseTrail('constellation')">
+            <div class="trail-option-card" id="trailCardConstellation" onclick="setMouseTrail(&#39;constellation&#39;)">
               <div class="trail-preview trail-preview-constellation">
                 <div class="cnode" style="top:20%;left:30%"></div>
                 <div class="cnode" style="top:60%;left:20%"></div>
@@ -1140,49 +1157,53 @@
               <div class="trail-option-desc">Jaringan titik terhubung</div>
             </div>
           </div>
-        </div>
+        </div></div></details>
 
         <!-- Theme & Color Section -->
-        <div class="section">
-          <h3 style="margin-bottom: 16px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--textSecondary);">Tema &amp; Warna</h3>
+        <details class="collapsible-section" id="collapse-theme-color" open>
+          <summary class="collapsible-summary">
+            <span class="collapsible-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><circle cx="13.5" cy="6.5" r="2.5" fill="currentColor"/><path d="M13.5 9c-3 0-5.5 2-5.5 5.5V20h11v-5.5c0-3.5-2.5-5.5-5.5-5.5z" fill="currentColor" opacity="0.3"/><circle cx="13.5" cy="6.5" r="5" stroke="currentColor"/></svg> Tema &amp; Warna</span>
+          </summary>
+          <div class="collapsible-content">
+          <div style="padding-bottom: 4px;">
           <div style="margin-bottom: 20px;">
             <label class="form-label">Preset Tema (15 Pilihan)</label>
-            <div class="template-grid" id="themePresets" style="grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));"></div>
+            <div class="template-grid" id="themePresets" style="grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));"><div class="theme-preset-card " onclick="setThemePreset(&#39;warm&#39;)" style="animation-delay:0s"><div class="preset-preview"><div class="preset-dot" style="background:#F7F5F0;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#2C2825"></div><div class="preset-dot" style="background:#4A8B7F"></div></div><div class="preset-name">Warm Sand</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;cool&#39;)" style="animation-delay:0.03s"><div class="preset-preview"><div class="preset-dot" style="background:#F0F4F8;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#1E293B"></div><div class="preset-dot" style="background:#3B82F6"></div></div><div class="preset-name">Cool Breeze</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;forest&#39;)" style="animation-delay:0.06s"><div class="preset-preview"><div class="preset-dot" style="background:#F0FDF4;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#14532D"></div><div class="preset-dot" style="background:#22C55E"></div></div><div class="preset-name">Forest</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;ocean&#39;)" style="animation-delay:0.09s"><div class="preset-preview"><div class="preset-dot" style="background:#F0F9FF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#0C4A6E"></div><div class="preset-dot" style="background:#0EA5E9"></div></div><div class="preset-name">Ocean</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;sunset&#39;)" style="animation-delay:0.12s"><div class="preset-preview"><div class="preset-dot" style="background:#FFF7ED;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#7C2D12"></div><div class="preset-dot" style="background:#F97316"></div></div><div class="preset-name">Sunset</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;midnight&#39;)" style="animation-delay:0.15s"><div class="preset-preview"><div class="preset-dot" style="background:#0F172A;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#1E293B;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#E2E8F0"></div><div class="preset-dot" style="background:#818CF8"></div></div><div class="preset-name">Midnight</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;coffee&#39;)" style="animation-delay:0.18s"><div class="preset-preview"><div class="preset-dot" style="background:#FAF6F1;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#451a03"></div><div class="preset-dot" style="background:#92400E"></div></div><div class="preset-name">Coffee</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;lavender&#39;)" style="animation-delay:0.21s"><div class="preset-preview"><div class="preset-dot" style="background:#FAF5FF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#581C87"></div><div class="preset-dot" style="background:#A855F7"></div></div><div class="preset-name">Lavender</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;rose&#39;)" style="animation-delay:0.24s"><div class="preset-preview"><div class="preset-dot" style="background:#FFF1F2;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#881337"></div><div class="preset-dot" style="background:#E11D48"></div></div><div class="preset-name">Rose</div></div><div class="theme-preset-card active" onclick="setThemePreset(&#39;slate&#39;)" style="animation-delay:0.27s"><div class="preset-preview"><div class="preset-dot" style="background:#F8FAFC;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#334155"></div><div class="preset-dot" style="background:#64748B"></div></div><div class="preset-name">Slate</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;mint&#39;)" style="animation-delay:0.3s"><div class="preset-preview"><div class="preset-dot" style="background:#F0FDFA;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#134E4A"></div><div class="preset-dot" style="background:#14B8A6"></div></div><div class="preset-name">Mint</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;berry&#39;)" style="animation-delay:0.32999999999999996s"><div class="preset-preview"><div class="preset-dot" style="background:#FDF2F8;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#831843"></div><div class="preset-dot" style="background:#D946EF"></div></div><div class="preset-name">Berry</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;charcoal&#39;)" style="animation-delay:0.36s"><div class="preset-preview"><div class="preset-dot" style="background:#18181B;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#27272A;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#E4E4E7"></div><div class="preset-dot" style="background:#A1A1AA"></div></div><div class="preset-name">Charcoal</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;gold&#39;)" style="animation-delay:0.39s"><div class="preset-preview"><div class="preset-dot" style="background:#FFFBEB;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#713F12"></div><div class="preset-dot" style="background:#D97706"></div></div><div class="preset-name">Gold</div></div><div class="theme-preset-card " onclick="setThemePreset(&#39;nord&#39;)" style="animation-delay:0.42s"><div class="preset-preview"><div class="preset-dot" style="background:#ECEFF4;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="preset-dot" style="background:#2E3440"></div><div class="preset-dot" style="background:#5E81AC"></div></div><div class="preset-name">Nord</div></div></div>
           </div>
           <div style="margin-bottom: 20px;">
             <label class="form-label">Mode Tampilan</label>
             <div style="display: flex; gap: 10px;">
-              <button class="btn btn-secondary" id="btnModeLight" onclick="setThemeMode('light')">Terang</button>
-              <button class="btn btn-secondary" id="btnModeDark" onclick="setThemeMode('dark')">Gelap</button>
-              <button class="btn btn-secondary" id="btnModeAuto" onclick="setThemeMode('auto')">Otomatis</button>
+              <button class="btn btn-accent" id="btnModeLight" onclick="setThemeMode(&#39;light&#39;)">Terang</button>
+              <button class="btn btn-secondary" id="btnModeDark" onclick="setThemeMode(&#39;dark&#39;)">Gelap</button>
+              <button class="btn btn-secondary" id="btnModeAuto" onclick="setThemeMode(&#39;auto&#39;)">Otomatis</button>
             </div>
           </div>
           <div style="margin-bottom: 20px;">
             <label class="form-label">Warna Kustom</label>
             <div class="color-row">
               <label>Background</label>
-              <input type="color" id="customBg" onchange="updateCustomColor('bg', this.value)">
-              <input type="text" class="form-input" id="customBgText" onchange="updateCustomColor('bg', this.value)">
+              <input type="color" id="customBg" onchange="updateCustomColor(&#39;bg&#39;, this.value)">
+              <input type="text" class="form-input" id="customBgText" onchange="updateCustomColor(&#39;bg&#39;, this.value)">
             </div>
             <div class="color-row">
               <label>Surface</label>
-              <input type="color" id="customSurface" onchange="updateCustomColor('surface', this.value)">
-              <input type="text" class="form-input" id="customSurfaceText" onchange="updateCustomColor('surface', this.value)">
+              <input type="color" id="customSurface" onchange="updateCustomColor(&#39;surface&#39;, this.value)">
+              <input type="text" class="form-input" id="customSurfaceText" onchange="updateCustomColor(&#39;surface&#39;, this.value)">
             </div>
             <div class="color-row">
               <label>Primary</label>
-              <input type="color" id="customPrimary" onchange="updateCustomColor('primary', this.value)">
-              <input type="text" class="form-input" id="customPrimaryText" onchange="updateCustomColor('primary', this.value)">
+              <input type="color" id="customPrimary" onchange="updateCustomColor(&#39;primary&#39;, this.value)">
+              <input type="text" class="form-input" id="customPrimaryText" onchange="updateCustomColor(&#39;primary&#39;, this.value)">
             </div>
             <div class="color-row">
               <label>Accent</label>
-              <input type="color" id="customAccent" onchange="updateCustomColor('accent', this.value)">
-              <input type="text" class="form-input" id="customAccentText" onchange="updateCustomColor('accent', this.value)">
+              <input type="color" id="customAccent" onchange="updateCustomColor(&#39;accent&#39;, this.value)">
+              <input type="text" class="form-input" id="customAccentText" onchange="updateCustomColor(&#39;accent&#39;, this.value)">
             </div>
             <div class="color-row">
               <label>Text Primary</label>
-              <input type="color" id="customText" onchange="updateCustomColor('textPrimary', this.value)">
-              <input type="text" class="form-input" id="customTextText" onchange="updateCustomColor('textPrimary', this.value)">
+              <input type="color" id="customText" onchange="updateCustomColor(&#39;textPrimary&#39;, this.value)">
+              <input type="text" class="form-input" id="customTextText" onchange="updateCustomColor(&#39;textPrimary&#39;, this.value)">
             </div>
             <div style="display: flex; gap: 10px; margin-top: 12px;">
               <button class="btn btn-accent" onclick="applyCustomColors()">Terapkan Warna</button>
@@ -1197,12 +1218,12 @@
               <button class="btn btn-secondary" onclick="resetCustomCSS()">Reset CSS</button>
             </div>
           </div>
-        </div>
+        </div></div></details>
 
         <!-- GitHub Gist Sync Section -->
         <div class="section">
           <h3 style="margin-bottom: 16px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--textSecondary);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
             Sinkronisasi GitHub Gist
           </h3>
           <p style="font-size: 13px; color: var(--textSecondary); margin-bottom: 16px;">Sinkronkan data Anda ke GitHub Gist untuk backup cloud dan akses dari perangkat lain.</p>
@@ -1214,7 +1235,7 @@
                 <div class="token-input-wrapper">
                   <input type="password" class="form-input" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
                   <button class="token-toggle" type="button" onclick="toggleTokenVisibility()" title="Tampilkan/Sembunyikan">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                   </button>
                 </div>
                 <p style="font-size: 11px; color: var(--textMuted); margin-top: 4px;">Token memerlukan scope <code style="background: var(--primaryLight); padding: 1px 4px; border-radius: 3px;">gist</code>. <a href="https://github.com/settings/tokens/new" target="_blank" style="color: var(--accent);">Buat token baru</a></p>
@@ -1229,16 +1250,16 @@
             <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px;">
               <button class="btn btn-accent" id="btnSyncToGithub" onclick="syncToGithub()">
                 <span class="btn-spinner"></span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                 <span class="btn-text">Upload ke Gist</span>
               </button>
               <button class="btn btn-secondary" id="btnSyncFromGithub" onclick="syncFromGithub()">
                 <span class="btn-spinner"></span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 <span class="btn-text">Download dari Gist</span>
               </button>
               <button class="btn btn-secondary" onclick="testGithubConnection()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                 Test Koneksi
               </button>
             </div>
@@ -1267,12 +1288,18 @@
               <span id="githubStatusText">Belum terhubung ke GitHub</span>
             </div>
           </div>
-        </div>
+        </div></div></details>
 
         <div class="section">
-          <h3 style="margin-bottom: 16px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--textSecondary);">Status Workflow</h3>
+          <details class="collapsible-section" id="collapse-status-workflow" open>
+          <summary class="collapsible-summary">
+            <span class="collapsible-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Status Workflow</span>
+          </summary>
+          <div class="collapsible-content">
+          <div style="padding-bottom: 4px;">
+          <h3 style="display:none">Status Workflow</h3>
           <p style="font-size: 13px; color: var(--textSecondary); margin-bottom: 16px;">Urusan urutan status dokumen. Dokumen akan mengikuti alur ini.</p>
-          <div class="master-list" id="settingsStatusList"></div>
+          <div class="master-list" id="settingsStatusList"><div class="master-item" style="animation-delay:0s"><div class="master-item-info"><div class="master-item-title">1. Draft</div></div><div style="display:flex;gap:6px"><button class="action-btn" onclick="moveStatus(0, 1)" title="Turun" data-tooltip="Turun">↓</button><button class="action-btn delete" onclick="removeStatus(0)" title="Hapus" data-tooltip="Hapus">×</button></div></div><div class="master-item" style="animation-delay:0.05s"><div class="master-item-info"><div class="master-item-title">2. Review</div></div><div style="display:flex;gap:6px"><button class="action-btn" onclick="moveStatus(1, -1)" title="Naik" data-tooltip="Naik">↑</button><button class="action-btn" onclick="moveStatus(1, 1)" title="Turun" data-tooltip="Turun">↓</button><button class="action-btn delete" onclick="removeStatus(1)" title="Hapus" data-tooltip="Hapus">×</button></div></div><div class="master-item" style="animation-delay:0.1s"><div class="master-item-info"><div class="master-item-title">3. Sent</div></div><div style="display:flex;gap:6px"><button class="action-btn" onclick="moveStatus(2, -1)" title="Naik" data-tooltip="Naik">↑</button><button class="action-btn" onclick="moveStatus(2, 1)" title="Turun" data-tooltip="Turun">↓</button><button class="action-btn delete" onclick="removeStatus(2)" title="Hapus" data-tooltip="Hapus">×</button></div></div><div class="master-item" style="animation-delay:0.15000000000000002s"><div class="master-item-info"><div class="master-item-title">4. Received</div></div><div style="display:flex;gap:6px"><button class="action-btn" onclick="moveStatus(3, -1)" title="Naik" data-tooltip="Naik">↑</button><button class="action-btn" onclick="moveStatus(3, 1)" title="Turun" data-tooltip="Turun">↓</button><button class="action-btn delete" onclick="removeStatus(3)" title="Hapus" data-tooltip="Hapus">×</button></div></div><div class="master-item" style="animation-delay:0.2s"><div class="master-item-info"><div class="master-item-title">5. Archived</div></div><div style="display:flex;gap:6px"><button class="action-btn" onclick="moveStatus(4, -1)" title="Naik" data-tooltip="Naik">↑</button><button class="action-btn delete" onclick="removeStatus(4)" title="Hapus" data-tooltip="Hapus">×</button></div></div></div>
           <div style="display: flex; gap: 8px; margin-top: 12px;">
             <input type="text" class="form-input" id="newStatusName" placeholder="Nama status baru" style="flex:1">
             <button class="btn btn-secondary" onclick="addCustomStatus()">Tambah Status</button>
@@ -1286,17 +1313,23 @@
             Reset counter nomor surat otomatis saat tahun berganti
           </label>
           <p style="font-size: 12px; color: var(--textMuted);">Jika diaktifkan, counter akan kembali ke 001 pada 1 Januari setiap tahunnya.</p>
-        </div>
+        </div></div></details>
 
         <div class="section">
-          <h3 style="margin-bottom: 16px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--textSecondary);">Data Management</h3>
+          <details class="collapsible-section" id="collapse-data-mgmt" open>
+          <summary class="collapsible-summary">
+            <span class="collapsible-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg> Data Management</span>
+          </summary>
+          <div class="collapsible-content">
+          <div style="padding-bottom: 4px;">
+          <h3 style="display:none">Data Management</h3>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <button class="btn btn-secondary" onclick="exportData()">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
               Export JSON
             </button>
-            <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <button class="btn btn-secondary" onclick="document.getElementById(&#39;importFile&#39;).click()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
               Import JSON
             </button>
             <input type="file" id="importFile" class="hidden" accept=".json" onchange="importData(this)">
@@ -1307,17 +1340,17 @@
 
     </div>
   </main>
-</div>
+</div></div></details>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" onclick="event.stopPropagation()">
+  <div class="modal" onclick="event.stopPropagation()" style="animation: 0.25s ease-out 0s 1 normal forwards running modalOut;">
     <div class="modal-header">
-      <span class="modal-title" id="modalTitle">Konfirmasi</span>
-      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <span class="modal-title" id="modalTitle">Konfirmasi Hapus</span>
+      <button class="modal-close" onclick="closeModal()">×</button>
     </div>
-    <div class="modal-body" id="modalBody"></div>
-    <div class="modal-footer" id="modalFooter"></div>
+    <div class="modal-body" id="modalBody"><p style="color:var(--error);font-weight:600">PERHATIAN: Tindakan ini tidak bisa dibatalkan.</p><p>Dokumen akan dihapus secara permanen.</p></div>
+    <div class="modal-footer" id="modalFooter"><button class="btn btn-secondary" onclick="closeModal()">Batal</button><button class="btn btn-danger" onclick="confirmDelete(&#39;doc_1780968311809&#39;)">Hapus Permanen</button></div>
   </div>
 </div>
 
@@ -1351,21 +1384,26 @@ let SEGMENT_TYPES = [
 ];
 const MAX_SEGMENTS = 10;
 const THEME_PRESETS = [
-  { id: 'warm', name: 'Warm Sand', colors: { bg:'#F7F5F0', surface:'#FFFFFF', primary:'#2C2825', accent:'#4A8B7F', textPrimary:'#1E1B18' } },
-  { id: 'cool', name: 'Cool Breeze', colors: { bg:'#F0F4F8', surface:'#FFFFFF', primary:'#1E293B', accent:'#3B82F6', textPrimary:'#0F172A' } },
-  { id: 'forest', name: 'Forest', colors: { bg:'#F0FDF4', surface:'#FFFFFF', primary:'#14532D', accent:'#22C55E', textPrimary:'#052E16' } },
-  { id: 'ocean', name: 'Ocean', colors: { bg:'#F0F9FF', surface:'#FFFFFF', primary:'#0C4A6E', accent:'#0EA5E9', textPrimary:'#082F49' } },
-  { id: 'sunset', name: 'Sunset', colors: { bg:'#FFF7ED', surface:'#FFFFFF', primary:'#7C2D12', accent:'#F97316', textPrimary:'#431407' } },
-  { id: 'midnight', name: 'Midnight', colors: { bg:'#0F172A', surface:'#1E293B', primary:'#E2E8F0', accent:'#818CF8', textPrimary:'#F8FAFC' } },
-  { id: 'coffee', name: 'Coffee', colors: { bg:'#FAF6F1', surface:'#FFFFFF', primary:'#451a03', accent:'#92400E', textPrimary:'#280F01' } },
-  { id: 'lavender', name: 'Lavender', colors: { bg:'#FAF5FF', surface:'#FFFFFF', primary:'#581C87', accent:'#A855F7', textPrimary:'#3B0764' } },
-  { id: 'rose', name: 'Rose', colors: { bg:'#FFF1F2', surface:'#FFFFFF', primary:'#881337', accent:'#E11D48', textPrimary:'#4C0519' } },
-  { id: 'slate', name: 'Slate', colors: { bg:'#F8FAFC', surface:'#FFFFFF', primary:'#334155', accent:'#64748B', textPrimary:'#0F172A' } },
-  { id: 'mint', name: 'Mint', colors: { bg:'#F0FDFA', surface:'#FFFFFF', primary:'#134E4A', accent:'#14B8A6', textPrimary:'#042F2E' } },
-  { id: 'berry', name: 'Berry', colors: { bg:'#FDF2F8', surface:'#FFFFFF', primary:'#831843', accent:'#D946EF', textPrimary:'#500724' } },
-  { id: 'charcoal', name: 'Charcoal', colors: { bg:'#18181B', surface:'#27272A', primary:'#E4E4E7', accent:'#A1A1AA', textPrimary:'#FAFAFA' } },
-  { id: 'gold', name: 'Gold', colors: { bg:'#FFFBEB', surface:'#FFFFFF', primary:'#713F12', accent:'#D97706', textPrimary:'#422006' } },
-  { id: 'nord', name: 'Nord', colors: { bg:'#ECEFF4', surface:'#FFFFFF', primary:'#2E3440', accent:'#5E81AC', textPrimary:'#3B4252' } }
+  // SET 1 — WARM SAND
+  { id: 'warm', name: 'Warm Sand', colors: { bg:'#F5F0E8', surface:'#FFFDF9', sidebar:'#EDE5D5', primary:'#8B6F47', accent:'#6B8F71', textPrimary:'#3D3226', textSecondary:'#7A6B5D', border:'#D4C9B8', hover:'#A68B5B', success:'#A8C5A0' } },
+  // SET 2 — COOL BREEZE
+  { id: 'cool', name: 'Cool Breeze', colors: { bg:'#F0F4F8', surface:'#FFFFFF', sidebar:'#E2E8F0', primary:'#2563A8', accent:'#4A90D9', textPrimary:'#1A2332', textSecondary:'#5A6B7F', border:'#CBD5E1', hover:'#3B7DD8', success:'#7EC8C8' } },
+  // SET 3 — FOREST GREEN
+  { id: 'forest', name: 'Forest Green', colors: { bg:'#F0F5F0', surface:'#FFFFFF', sidebar:'#F7FAF7', primary:'#1E4D2E', accent:'#2D5A3D', textPrimary:'#1B2E1B', textSecondary:'#5C7A5C', border:'#C8D8C8', hover:'#3A7A4F', success:'#8FBC8F' } },
+  // SET 4 — OCEAN BLUE
+  { id: 'ocean', name: 'Ocean Blue', colors: { bg:'#EEF4FA', surface:'#F8FBFF', sidebar:'#DCE8F5', primary:'#0E4D73', accent:'#1A6FA0', textPrimary:'#0D2137', textSecondary:'#4A6B8A', border:'#B8D4E8', hover:'#2196C7', success:'#5BC0DE' } },
+  // SET 5 — SUNSET ORANGE
+  { id: 'sunset', name: 'Sunset Orange', colors: { bg:'#FFF5EE', surface:'#FFFDFB', sidebar:'#FFE8D6', primary:'#C4622D', accent:'#E07B39', textPrimary:'#3D1F14', textSecondary:'#8B5E3C', border:'#E8C9B0', hover:'#F09050', success:'#E8B84B' } },
+  // SET 6 — MIDNIGHT DARK
+  { id: 'midnight', name: 'Midnight Dark', colors: { bg:'#1A1D23', surface:'#2A2F3A', sidebar:'#22262E', primary:'#5B52C4', accent:'#7C6FE0', textPrimary:'#E8EAF0', textSecondary:'#9CA3AF', border:'#3D4250', hover:'#9B8FEF', success:'#4ADE80' } },
+  // SET 7 — COFFEE BROWN
+  { id: 'coffee', name: 'Coffee Brown', colors: { bg:'#FDF8F0', surface:'#FFFDF8', sidebar:'#F5EDE0', primary:'#5C3A21', accent:'#6B4226', textPrimary:'#2C1810', textSecondary:'#7A5C47', border:'#D4BFA8', hover:'#8B6340', success:'#7A8B5C' } },
+  // SET 8 — LAVENDER PURPLE
+  { id: 'lavender', name: 'Lavender Purple', colors: { bg:'#F5F0FA', surface:'#FCFAFF', sidebar:'#EBE3F5', primary:'#6B4FA0', accent:'#8B6FC0', textPrimary:'#2D1B4E', textSecondary:'#7B6B8F', border:'#D4C8E8', hover:'#9B7FD0', success:'#D4A0C0' } },
+  // SET 9 — ROSE PINK
+  { id: 'rose', name: 'Rose Pink', colors: { bg:'#FDF2F4', surface:'#FFFAFB', sidebar:'#F8E0E6', primary:'#A83850', accent:'#C4506A', textPrimary:'#3D1520', textSecondary:'#8B5060', border:'#E8C0CC', hover:'#D86080', success:'#E8907A' } },
+  // SET 10 — SLATE GRAY
+  { id: 'slate', name: 'Slate Gray', colors: { bg:'#F4F5F7', surface:'#FCFDFE', sidebar:'#E8EAEE', primary:'#3B5A85', accent:'#4A6FA5', textPrimary:'#1E2229', textSecondary:'#6B7280', border:'#D1D5DB', hover:'#5A80B5', success:'#6B9B7B' } }
 ];
 
 let state = {
@@ -1484,11 +1522,45 @@ function applyTheme() {
   if (state.settings.customColors && Object.keys(state.settings.customColors).length > 0) {
     Object.entries(state.settings.customColors).forEach(([key, val]) => { if (val) root.style.setProperty('--' + key, val); });
   } else if (preset) {
+    // Terapkan semua 10 warna dari set
     root.style.setProperty('--bg', preset.colors.bg);
     root.style.setProperty('--surface', preset.colors.surface);
+    root.style.setProperty('--sidebar', preset.colors.sidebar);
     root.style.setProperty('--primary', preset.colors.primary);
     root.style.setProperty('--accent', preset.colors.accent);
     root.style.setProperty('--textPrimary', preset.colors.textPrimary);
+    root.style.setProperty('--textSecondary', preset.colors.textSecondary);
+    root.style.setProperty('--border', preset.colors.border);
+    root.style.setProperty('--primaryHover', preset.colors.hover);
+    root.style.setProperty('--success', preset.colors.success);
+    // Derive warna tambahan
+    root.style.setProperty('--surfaceHover', adjustColor(preset.colors.surface, -5));
+    root.style.setProperty('--textMuted', preset.colors.textSecondary + '99');
+    root.style.setProperty('--textInverse', isDark ? preset.colors.bg : preset.colors.surface);
+    root.style.setProperty('--accentLight', preset.colors.accent + '18');
+    root.style.setProperty('--accentHover', preset.colors.hover);
+    root.style.setProperty('--accentRing', preset.colors.accent + '40');
+    root.style.setProperty('--primaryLight', preset.colors.primary + '15');
+    root.style.setProperty('--primaryHover', preset.colors.hover);
+    root.style.setProperty('--inputBg', preset.colors.surface);
+    root.style.setProperty('--inputBorder', preset.colors.border);
+    root.style.setProperty('--borderStrong', preset.colors.border);
+    root.style.setProperty('--tagBg', preset.colors.border + '60');
+    root.style.setProperty('--tagText', preset.colors.textSecondary);
+    root.style.setProperty('--divider', preset.colors.border + '80');
+    root.style.setProperty('--error', '#B05555');
+    root.style.setProperty('--errorBg', '#FCE8E8');
+    root.style.setProperty('--warning', '#C4943A');
+    root.style.setProperty('--warningBg', '#FDF3E0');
+    root.style.setProperty('--info', '#5B7BA3');
+    root.style.setProperty('--infoBg', '#E8EEF5');
+    root.style.setProperty('--successBg', preset.colors.success + '25');
+    root.style.setProperty('--shadow', preset.colors.textPrimary + '10');
+    root.style.setProperty('--shadowHover', preset.colors.textPrimary + '18');
+    root.style.setProperty('--overlay', preset.colors.textPrimary + '4D');
+    // Sidebar background override
+    const sidebarEl = document.querySelector('.sidebar');
+    if (sidebarEl) sidebarEl.style.background = preset.colors.sidebar;
   }
   let customStyle = document.getElementById('custom-theme-style');
   if (!customStyle) { customStyle = document.createElement('style'); customStyle.id = 'custom-theme-style'; document.head.appendChild(customStyle); }
@@ -1583,8 +1655,11 @@ function setupKeyboard() {
       if (e.key === 'a') { e.preventDefault(); navigate('archive'); }
       if (e.key === 'p') { e.preventDefault(); navigate('settings'); }
     }
-    if (e.key === 'Escape') {
+        if (e.key === 'Escape') {
       if (document.getElementById('modalOverlay')?.classList.contains('active')) { closeModal(); return; }
+      // Tutup collapsible sections di Pengaturan
+      const openCollapses = document.querySelectorAll('.collapsible-section.open');
+      if (openCollapses.length > 0) { openCollapses.forEach(s => s.classList.remove('open')); return; }
       if (state.masterTab === 'template-builder') { cancelBuilder(); return; }
     }
     if (e.ctrlKey && e.key === 'Enter') {
@@ -1610,7 +1685,7 @@ function renderDashboard() {
   const todayCount = docs.filter(d => d.date === today).length;
   const monthCount = docs.filter(d => d.date && d.date.startsWith(today.slice(0,7))).length;
   document.getElementById('dashboardStats').innerHTML = `
-    <div class="stat-card dark-card"><div class="stat-header"><span class="stat-label" style="color:var(--textInverse);opacity:.8">Total Dokumen</span><div class="stat-icon" style="background:rgba(255,255,255,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div></div><div class="stat-value" style="color:var(--textInverse)">${docs.length}</div></div>
+    <div class="stat-card dark-card"><div class="stat-header"><span class="stat-label" style="color:var(--primary)">Total Dokumen</span><div class="stat-icon" style="background:var(--primary);color:var(--textInverse)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div></div><div class="stat-value" style="color:var(--primary)">${docs.length}</div></div>
     <div class="stat-card success-card"><div class="stat-header"><span class="stat-label" style="color:var(--success)">Hari Ini</span><div class="stat-icon" style="background:var(--surface)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div></div><div class="stat-value" style="color:var(--success)">${todayCount}</div></div>
     <div class="stat-card accent-card"><div class="stat-header"><span class="stat-label" style="color:var(--accent)">Bulan Ini</span><div class="stat-icon" style="background:var(--surface)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div><div class="stat-value" style="color:var(--accent)">${monthCount}</div></div>`;
   document.getElementById('dashboardTemplates').innerHTML = state.templates.map((t, i) => {
@@ -1634,33 +1709,7 @@ function renderFormOptions() {
   onTemplateChange();
 }
 function onTemplateChange() {
-  const tid = document.getElementById('docTemplate').value;
-  const tmpl = state.templates.find(t => t.id === tid) || state.templates[0];
-  const segList = document.getElementById('segmentList');
-  segList.innerHTML = '';
-  const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
-  tmpl.segments.forEach((segKey, idx) => {
-    const segDef = allSegs.find(s => s.key === segKey) || { label: segKey, sample: '?' };
-    const chip = document.createElement('div');
-    chip.className = 'segment-chip';
-    chip.style.animationDelay = (idx * 0.05) + 's';
-    chip.draggable = true; chip.dataset.index = idx; chip.dataset.key = segKey;
-    let value = segDef.sample || segKey.toUpperCase();
-    if (segKey === 'counter') value = String(tmpl.counter).padStart(3,'0');
-    if (segKey === 'month') value = getMonthValue();
-    if (segKey === 'year') value = new Date().getFullYear();
-    chip.innerHTML = `<span>${segDef.label}</span><span class="seg-val" id="seg-val-${segKey}">${value}</span>`;
-    if (tmpl.segments.length > 2) chip.innerHTML += `<button class="seg-remove" onclick="removeSegment(${idx})" title="Hapus segmen">\u00d7</button>`;
-    chip.addEventListener('dragstart', e => { draggedSegmentIndex = idx; chip.classList.add('dragging'); });
-    chip.addEventListener('dragend', e => { chip.classList.remove('dragging'); draggedSegmentIndex = null; });
-    chip.addEventListener('dragenter', e => { if (draggedSegmentIndex !== null && draggedSegmentIndex !== idx) chip.classList.add('drag-over'); });
-    chip.addEventListener('dragleave', e => { chip.classList.remove('drag-over'); });
-    segList.appendChild(chip);
-  });
-  const addSel = document.getElementById('segmentAddSelect');
-  const used = new Set(tmpl.segments);
-  addSel.innerHTML = allSegs.filter(s => !used.has(s.key)).map(s => `<option value="${s.key}">${s.label}</option>`).join('');
-  if (!addSel.innerHTML) addSel.innerHTML = '<option disabled>Tidak ada segmen tersisa</option>';
+  // Hanya update preview nomor surat, tidak ada drag-and-drop segmen
   updateSegmentPreview();
 }
 function allowDrop(e) { e.preventDefault(); }
@@ -1699,11 +1748,16 @@ function updateSegmentPreview() {
   preview.textContent = generatePreview(tmpl.segments, tmpl);
 }
 function generatePreview(segments, tmpl) {
+  const defaults = extractDefaultsFromFormat(tmpl);
   const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
   const parts = segments.map(key => {
     if (key === 'counter') return String(tmpl.counter || 1).padStart(3,'0');
     if (key === 'month') return getMonthValue();
     if (key === 'year') return new Date().getFullYear();
+    // Gunakan nilai dari format string template terlebih dahulu
+    if (defaults[key]) return defaults[key];
+    const segDef = allSegs.find(s => s.key === key);
+    if (segDef && segDef.sample) return segDef.sample;
     if (key === 'company') return (state.companies[0] || {}).code || 'IPI';
     if (key === 'division') return (state.divisions[0] || {}).code || 'DIV';
     if (key === 'project') return (state.projects[0] || {}).code || 'PRO';
@@ -1712,7 +1766,8 @@ function generatePreview(segments, tmpl) {
     if (custom) return custom.sample || key.toUpperCase();
     return key.toUpperCase();
   });
-  return parts.join('/');
+  const sep = tmpl.separator || '/';
+  return parts.join(sep);
 }
 function getMonthValue() {
   const fmt = MONTH_FORMATS.find(f => f.id === (state.settings.monthFormat || 'roman'));
@@ -1753,14 +1808,33 @@ function saveDocument() {
     state.documents.push(doc); showToast('Dokumen berhasil dibuat', 'success');
     triggerConfetti({ count: 30, colors: ['#4A8B7F', '#5A9367', '#22C55E', '#6BB8A8'] });
   }
-  saveState(); navigate('archive');
+  saveState();
+  // Tetap di halaman Create, pertahankan template yang sama
+  const savedTemplateId = tid;
+  document.getElementById('docDesc').value = '';
+  document.getElementById('docDueDate').value = '';
+  document.getElementById('docDate').value = new Date().toISOString().split('T')[0];
+  // Reset edit mode jika sedang edit
+  if (state.currentEditId) {
+    state.currentEditId = null;
+    document.getElementById('formTitle').textContent = 'Buat Dokumen';
+    document.getElementById('formSubtitle').textContent = 'Isi detail dokumen baru';
+    document.getElementById('btnSaveDoc').innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Simpan Dokumen`;
+  }
+  // Re-render segmen dengan counter yang sudah bertambah, template tetap sama
+  onTemplateChange();
 }
 function generateNumberFromSegments(tmpl) {
+  const defaults = extractDefaultsFromFormat(tmpl);
   const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
   const parts = tmpl.segments.map(key => {
     if (key === 'counter') return String(tmpl.counter || 1).padStart(3,'0');
     if (key === 'month') return getMonthValue();
     if (key === 'year') return new Date().getFullYear();
+    // Gunakan nilai dari format string template terlebih dahulu
+    if (defaults[key]) return defaults[key];
+    const segDef = allSegs.find(s => s.key === key);
+    if (segDef && segDef.sample) return segDef.sample;
     if (key === 'company') return (state.companies[0] || {}).code || 'IPI';
     if (key === 'division') return (state.divisions[0] || {}).code || 'BAHP';
     if (key === 'project') return (state.projects[0] || {}).code || 'PRO';
@@ -1769,7 +1843,20 @@ function generateNumberFromSegments(tmpl) {
     if (custom) return custom.sample || key.toUpperCase();
     return 'XXX';
   });
-  return parts.join('/');
+  const sep = tmpl.separator || '/';
+  return parts.join(sep);
+}
+// Ekstrak nilai default dari format string template (mis: "291/IPI/BAHP/MBG/{month}/{year}")
+function extractDefaultsFromFormat(tmpl) {
+  if (!tmpl || !tmpl.format) return {};
+  const parts = tmpl.format.split('/');
+  const defaults = {};
+  tmpl.segments.forEach((key, idx) => {
+    if (parts[idx] && !parts[idx].startsWith('{')) {
+      defaults[key] = parts[idx];
+    }
+  });
+  return defaults;
 }
 function editDocument(id) {
   const doc = state.documents.find(d => d.id === id);
@@ -1954,9 +2041,7 @@ function switchMasterTab(tab, el) {
   if (el) el.classList.add('active');
   else {
     const tabs = document.querySelectorAll('.tab');
-    const tabMap = ['codes','formats','templates'];
-    const idx = tabMap.indexOf(tab);
-    if (tabs[idx]) tabs[idx].classList.add('active');
+    if (tab === 'templates' && tabs[0]) tabs[0].classList.add('active');
     if (tab === 'template-builder') tabs.forEach(t => t.classList.remove('active'));
   }
   renderMaster();
@@ -1964,25 +2049,26 @@ function switchMasterTab(tab, el) {
 function renderMaster() {
   const container = document.getElementById('master-content');
   const tab = state.masterTab;
-  if (tab === 'codes') container.innerHTML = renderMasterCodes();
-  if (tab === 'formats') container.innerHTML = `<div class="section"><div class="section-header"><span class="section-title">Format Penomoran Bulan</span></div><div class="master-list">${MONTH_FORMATS.map((f, i) => `<div class="master-item" style="animation-delay:${i*0.05}s"><div class="master-item-info"><div class="master-item-title">${f.name}</div><div class="master-item-sub">Contoh bulan ini: <b>${f.fn(new Date().getMonth())}</b></div></div><button class="btn btn-sm ${state.settings.monthFormat===f.id?'btn-accent':'btn-secondary'}" onclick="setMonthFormat('${f.id}')">${state.settings.monthFormat===f.id?'Aktif':'Pilih'}</button></div>`).join('')}</div></div>`;
-  if (tab === 'templates') container.innerHTML = renderTemplateList();
+  // Hanya tampilkan Template (codes dan formats dihapus)
+  if (tab === 'templates' || tab === 'codes' || tab === 'formats') {
+    container.innerHTML = renderTemplateList();
+  }
   if (tab === 'template-builder') container.innerHTML = renderTemplateBuilder();
 }
-let builderState = { id: null, name: '', desc: '', counter: 1, segments: [] };
+let builderState = { id: null, name: '', desc: '', counter: 1, separator: '/', segments: [] };
 
 function renderTemplateList() {
   return `<div class="section"><div class="section-header"><span class="section-title">Template</span><button class="btn btn-primary" onclick="openTemplateBuilder()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Buat Template Baru</button></div><div class="template-grid">${state.templates.map((t, i) => `<div class="template-card" style="animation-delay:${i*0.08}s"><div class="template-name">${t.name}<span class="template-count" style="margin-left:8px;background:var(--accentLight);color:var(--accent)">#${t.counter || 1}</span></div><div class="template-desc">${t.desc}</div><div class="template-format">${t.format || generatePreview(t.segments, t)}</div><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-sm btn-secondary" onclick="editTemplateBuilder('${t.id}')">Edit</button><button class="btn btn-sm btn-danger" onclick="deleteTemplate('${t.id}')">Hapus</button></div></div>`).join('')}</div></div>`;
 }
 function openTemplateBuilder() {
-  builderState = { id: null, name: '', desc: '', counter: 1, segments: [{key:'counter',type:'counter',value:''},{key:'company',type:'company',value:'IPI'}] };
+  builderState = { id: null, name: '', desc: '', counter: 1, separator: '/', segments: [{key:'counter',type:'counter',value:''},{key:'company',type:'company',value:'IPI'}] };
   switchMasterTab('template-builder');
 }
 function editTemplateBuilder(id) {
   const t = state.templates.find(x => x.id === id);
   if (!t) return;
   builderState = {
-    id: t.id, name: t.name, desc: t.desc || '', counter: t.counter || 1,
+    id: t.id, name: t.name, desc: t.desc || '', counter: t.counter || 1, separator: t.separator || '/',
     segments: t.segments.map(sk => {
       const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
       const segDef = allSegs.find(s => s.key === sk);
@@ -2058,6 +2144,7 @@ function escapeHtml(text) {
 function updateBuilderName(v) { builderState.name = v; }
 function updateBuilderDesc(v) { builderState.desc = v; }
 function updateBuilderCounter(v) { const n = parseInt(v); builderState.counter = isNaN(n) || n < 1 ? 1 : n; updateBuilderPreviewUI(); }
+function updateBuilderSeparator(v) { builderState.separator = v || '/'; updateBuilderPreviewUI(); }
 function updateBuilderSegmentType(idx, newKey) {
   const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
   const segDef = allSegs.find(s => s.key === newKey);
@@ -2303,8 +2390,18 @@ function setupAutoReset() {
 function renderGithubSyncUI() {
   const tokenInput = document.getElementById('githubToken');
   const gistIdInput = document.getElementById('gistId');
+  // Muat token & gistId dari state (yang sudah tersimpan di localStorage)
   if (tokenInput) tokenInput.value = state.settings.githubToken || '';
   if (gistIdInput) gistIdInput.value = state.settings.gistId || '';
+  // Update status text
+  const saveHint = document.getElementById('githubSaveHint');
+  if (saveHint) {
+    if (state.settings.githubToken) {
+      saveHint.innerHTML = '<span style="color:var(--success)">Token tersimpan di localStorage</span> - Tidak akan hilang saat refresh';
+    } else {
+      saveHint.innerHTML = '<span style="color:var(--textMuted)">Klik "Simpan Token & Gist" agar tidak hilang saat refresh</span>';
+    }
+  }
 
   const hasToken = !!(state.settings.githubToken);
   const hasGistId = !!(state.settings.gistId);
@@ -2707,5 +2804,6 @@ function renderAll() {
 }
 window.addEventListener('DOMContentLoaded', init);
 </script>
-</body>
-</html>
+
+
+<div class="trail-sparkle" style="left: 463.897px; top: 338.897px; width: 12.206px; height: 12.206px; --sparkle-color: #64748B; --sparkle-life: 767.4630180574168ms; transform: rotate(223.868deg); --drift: -12.170580578880749px;"></div><div class="trail-sparkle" style="left: 466.487px; top: 341.487px; width: 7.02671px; height: 7.02671px; --sparkle-color: #64748B; --sparkle-life: 542.5390057872241ms; transform: rotate(147.999deg); --drift: -7.378329219076538px;"></div><div class="trail-sparkle" style="left: 464.721px; top: 339.721px; width: 10.5587px; height: 10.5587px; --sparkle-color: #64748B; --sparkle-life: 670.4502265953242ms; transform: rotate(315.368deg); --drift: 6.251552616247147px;"></div><div class="trail-sparkle" style="left: 462.414px; top: 337.414px; width: 15.1721px; height: 15.1721px; --sparkle-color: #64748B; --sparkle-life: 644.7941708344513ms; transform: rotate(8.1698deg); --drift: -5.34882863436263px;"></div><div class="trail-sparkle" style="left: 465.289px; top: 340.289px; width: 9.42231px; height: 9.42231px; --sparkle-color: #64748B; --sparkle-life: 858.4531600427553ms; transform: rotate(68.9719deg); --drift: 3.6690246047512742px;"></div><div class="trail-sparkle" style="left: 464.743px; top: 339.743px; width: 10.5148px; height: 10.5148px; --sparkle-color: #64748B; --sparkle-life: 845.7565767305373ms; transform: rotate(17.665deg); --drift: -8.343753664617806px;"></div><div class="trail-sparkle" style="left: 466.459px; top: 341.459px; width: 7.08276px; height: 7.08276px; --sparkle-color: #64748B; --sparkle-life: 532.56481856489ms; transform: rotate(176.074deg); --drift: 17.028027133607186px;"></div><div class="trail-sparkle" style="left: 462.333px; top: 337.333px; width: 15.3332px; height: 15.3332px; --sparkle-color: #64748B; --sparkle-life: 661.4679301831012ms; transform: rotate(191.075deg); --drift: -9.85969143314961px;"></div><div class="trail-sparkle" style="left: 465.851px; top: 340.851px; width: 8.2971px; height: 8.2971px; --sparkle-color: #64748B; --sparkle-life: 549.2044647954568ms; transform: rotate(350.906deg); --drift: 11.156525974429492px;"></div><div class="trail-sparkle" style="left: 466.133px; top: 341.133px; width: 7.73416px; height: 7.73416px; --sparkle-color: #64748B; --sparkle-life: 684.3841749569909ms; transform: rotate(71.0085deg); --drift: -11.897516269325505px;"></div><div class="trail-sparkle" style="left: 463.886px; top: 338.886px; width: 12.228px; height: 12.228px; --sparkle-color: #64748B; --sparkle-life: 801.072085815488ms; transform: rotate(3.27979deg); --drift: -16.40842158193076px;"></div><div class="trail-sparkle" style="left: 462.434px; top: 337.434px; width: 15.1328px; height: 15.1328px; --sparkle-color: #64748B; --sparkle-life: 818.3874114507828ms; transform: rotate(206.048deg); --drift: 7.049561325264491px;"></div><div class="trail-sparkle" style="left: 464.78px; top: 339.78px; width: 10.4409px; height: 10.4409px; --sparkle-color: #64748B; --sparkle-life: 693.9650793145954ms; transform: rotate(153.85deg); --drift: -3.741657148356494px;"></div><div class="trail-sparkle" style="left: 464.939px; top: 339.939px; width: 10.1225px; height: 10.1225px; --sparkle-color: #64748B; --sparkle-life: 749.2362679105144ms; transform: rotate(0.902315deg); --drift: -13.496665107336657px;"></div><div class="trail-sparkle" style="left: 462.221px; top: 337.221px; width: 15.5587px; height: 15.5587px; --sparkle-color: #64748B; --sparkle-life: 824.1298228012145ms; transform: rotate(306.958deg); --drift: 8.111811878388169px;"></div><div class="trail-sparkle" style="left: 463.867px; top: 338.867px; width: 12.2662px; height: 12.2662px; --sparkle-color: #64748B; --sparkle-life: 605.7265337628354ms; transform: rotate(210.472deg); --drift: -19.05640721497177px;"></div><div class="trail-sparkle" style="left: 462.876px; top: 337.876px; width: 14.2472px; height: 14.2472px; --sparkle-color: #64748B; --sparkle-life: 609.7900785771966ms; transform: rotate(86.7093deg); --drift: -11.646095961506795px;"></div><div class="trail-sparkle" style="left: 463.286px; top: 338.286px; width: 13.4289px; height: 13.4289px; --sparkle-color: #64748B; --sparkle-life: 548.3143153641746ms; transform: rotate(131.774deg); --drift: -0.6835221306739436px;"></div></body></html>
