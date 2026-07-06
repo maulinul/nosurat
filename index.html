@@ -870,8 +870,8 @@
     transform: translateY(0);
   }
 </style>
-<!--<base target="_blank">--><base href="." target="_blank">
-<style id="custom-theme-style"></style><base target="_blank">
+<base href="." target="_blank">
+<style id="custom-theme-style"></style>
 </head>
 <body>
 
@@ -1128,7 +1128,7 @@
           <div style="padding-bottom: 4px;">
           <p style="font-size: 13px; color: var(--textSecondary); margin-bottom: 16px;">Pilih efek visual yang mengikuti pergerakan kursor Anda di seluruh aplikasi.</p>
           <div class="trail-option-grid">
-            <div class="trail-option-card ${state?.settings?.mouseTrail === &#39;none&#39; || !state?.settings?.mouseTrail ? &#39;active&#39; : &#39;&#39;}" id="trailCardNone" onclick="setMouseTrail(&#39;none&#39;)">
+            <div class="trail-option-card" id="trailCardNone" onclick="setMouseTrail(&#39;none&#39;)">
               <div class="trail-preview" style="background: var(--border);">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
               </div>
@@ -1514,6 +1514,17 @@ function saveState() {
 }
 
 // ===================== THEME =====================
+function adjustColor(hex, percent) {
+  hex = String(hex || '#000000').replace('#', '');
+  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  const num = parseInt(hex, 16) || 0;
+  const amt = Math.round(255 * (percent / 100));
+  const clamp = v => Math.max(0, Math.min(255, v));
+  const r = clamp((num >> 16) + amt);
+  const g = clamp(((num >> 8) & 0xFF) + amt);
+  const b = clamp((num & 0xFF) + amt);
+  return '#' + (0x1000000 + r * 0x10000 + g * 0x100 + b).toString(16).slice(1);
+}
 function applyTheme() {
   const isDark = state.settings.theme === 'dark' || (state.settings.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
   document.documentElement.classList.toggle('dark', isDark);
@@ -1690,12 +1701,12 @@ function renderDashboard() {
     <div class="stat-card accent-card"><div class="stat-header"><span class="stat-label" style="color:var(--accent)">Bulan Ini</span><div class="stat-icon" style="background:var(--surface)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div><div class="stat-value" style="color:var(--accent)">${monthCount}</div></div>`;
   document.getElementById('dashboardTemplates').innerHTML = state.templates.map((t, i) => {
     const count = docs.filter(d => d.templateId === t.id).length;
-    return `<div class="template-card" onclick="quickCreate('${t.id}')" style="animation-delay:${i*0.08}s"><div class="template-header"><span class="template-count">${count} dokumen</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div><div class="template-name">${t.name}</div><div class="template-desc">${t.desc}</div><div class="template-format">${t.format || generatePreview(t.segments, t)}</div></div>`;
+    return `<div class="template-card" onclick="quickCreate('${escapeJsAttr(t.id)}')" style="animation-delay:${i*0.08}s"><div class="template-header"><span class="template-count">${count} dokumen</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div><div class="template-name">${escapeHtml(t.name)}</div><div class="template-desc">${escapeHtml(t.desc)}</div><div class="template-format">${escapeHtml(t.format || generatePreview(t.segments, t))}</div></div>`;
   }).join('');
   const recent = [...docs].sort((a,b) => (b.createdAt||0) - (a.createdAt||0)).slice(0,5);
   document.getElementById('dashboardActivity').innerHTML = recent.length ? recent.map((d, i) => `
     <div class="activity-item" style="animation-delay:${i*0.06}s"><div class="activity-icon" style="background:var(--successBg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
-    <div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="td-mono">${d.number}</span><span class="badge badge-${d.status.toLowerCase().replace(/\s/g,'')}">${d.status}</span></div><div style="font-size:12px;color:var(--textSecondary);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${d.title || d.desc || ''}</div></div>
+    <div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="td-mono">${escapeHtml(d.number)}</span><span class="badge badge-${safeClass(d.status)}">${escapeHtml(d.status)}</span></div><div style="font-size:12px;color:var(--textSecondary);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(d.title || d.desc || '')}</div></div>
     <span style="font-size:11px;color:var(--textMuted);white-space:nowrap">${formatDate(d.date)}</span></div>`).join('') : '<div class="empty">Belum ada aktivitas</div>';
 }
 function quickCreate(tid) { navigate('create'); document.getElementById('docTemplate').value = tid; onTemplateChange(); }
@@ -1703,9 +1714,9 @@ function quickCreate(tid) { navigate('create'); document.getElementById('docTemp
 // ===================== FORM / CREATE =====================
 function renderFormOptions() {
   const tSel = document.getElementById('docTemplate');
-  tSel.innerHTML = state.templates.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+  tSel.innerHTML = state.templates.map(t => `<option value="${escapeHtml(t.id)}">${escapeHtml(t.name)}</option>`).join('');
   const sSel = document.getElementById('docStatus');
-  sSel.innerHTML = state.settings.statuses.map(s => `<option value="${s}">${s}</option>`).join('');
+  sSel.innerHTML = state.settings.statuses.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
   onTemplateChange();
 }
 function onTemplateChange() {
@@ -1939,7 +1950,7 @@ function updateBatchBar() {
     bar.classList.remove('hidden');
     document.getElementById('batchCount').textContent = state.selectedDocIds.size + ' item terpilih';
     const bSel = document.getElementById('batchStatusSelect');
-    bSel.innerHTML = state.settings.statuses.map(s => `<option value="${s}">${s}</option>`).join('');
+    bSel.innerHTML = state.settings.statuses.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
   } else { bar.classList.add('hidden'); document.getElementById('selectAllCheckbox').checked = false; }
 }
 function clearBatchSelection() { state.selectedDocIds.clear(); document.getElementById('selectAllCheckbox').checked = false; updateBatchBar(); renderArchiveTableOnly(); }
@@ -1983,14 +1994,14 @@ function renderArchiveTableOnly() {
     const dueClass = getDueClass(d.dueDate);
     const dueText = d.dueDate ? `<span class="${dueClass}">${formatDate(d.dueDate)}</span>` : '-';
     const isSelected = state.selectedDocIds.has(d.id);
-    return `<tr class="${d.archived?'archived':''} ${isSelected?'selected':''}" style="animation-delay:${i*0.04}s"><td class="td-checkbox"><input type="checkbox" ${isSelected?'checked':''} onchange="toggleDocSelect('${d.id}')"></td><td><span class="td-mono">${d.number}</span><div class="status-flow">${renderStatusFlow(d.status)}</div></td><td><span class="badge badge-draft" style="background:var(--accentLight);color:var(--accent)">${d.templateName}</span></td><td><span class="badge badge-${d.status.toLowerCase().replace(/\s/g,'')}">${d.status}</span></td><td>${formatDate(d.date)}</td><td>${dueText}</td><td><div class="td-actions" style="justify-content:flex-end"><button class="action-btn" onclick="copyNumber('${d.number}')" title="Salin" data-tooltip="Salin"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button><button class="action-btn" onclick="editDocument('${d.id}')" title="Edit" data-tooltip="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>${!d.archived ? `<button class="action-btn" onclick="archiveDocument('${d.id}')" title="Arsipkan" data-tooltip="Arsipkan"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></button>` : ''}<button class="action-btn delete" onclick="deleteDocument('${d.id}')" title="Hapus" data-tooltip="Hapus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></div></td></tr>`;
+    return `<tr class="${d.archived?'archived':''} ${isSelected?'selected':''}" style="animation-delay:${i*0.04}s"><td class="td-checkbox"><input type="checkbox" ${isSelected?'checked':''} onchange="toggleDocSelect('${d.id}')"></td><td><span class="td-mono">${escapeHtml(d.number)}</span><div class="status-flow">${renderStatusFlow(d.status)}</div></td><td><span class="badge badge-draft" style="background:var(--accentLight);color:var(--accent)">${escapeHtml(d.templateName)}</span></td><td><span class="badge badge-${safeClass(d.status)}">${escapeHtml(d.status)}</span></td><td>${formatDate(d.date)}</td><td>${dueText}</td><td><div class="td-actions" style="justify-content:flex-end"><button class="action-btn" onclick="copyNumber('${escapeJsAttr(d.number)}')" title="Salin" data-tooltip="Salin"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button><button class="action-btn" onclick="editDocument('${d.id}')" title="Edit" data-tooltip="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>${!d.archived ? `<button class="action-btn" onclick="archiveDocument('${d.id}')" title="Arsipkan" data-tooltip="Arsipkan"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></button>` : ''}<button class="action-btn delete" onclick="deleteDocument('${d.id}')" title="Hapus" data-tooltip="Hapus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></div></td></tr>`;
   }).join('') : `<tr><td colspan="7" class="empty">Tidak ada dokumen ditemukan</td></tr>`;
 }
 function renderArchive() {
   const typeSel = document.getElementById('filterType');
-  if (typeSel && !typeSel.dataset.populated) { typeSel.innerHTML = '<option value="">Semua Tipe</option>' + state.templates.map(t => `<option value="${t.id}">${t.name}</option>`).join(''); typeSel.dataset.populated = 'true'; }
+  if (typeSel && !typeSel.dataset.populated) { typeSel.innerHTML = '<option value="">Semua Tipe</option>' + state.templates.map(t => `<option value="${escapeHtml(t.id)}">${escapeHtml(t.name)}</option>`).join(''); typeSel.dataset.populated = 'true'; }
   const statusSel = document.getElementById('filterStatus');
-  if (statusSel && !statusSel.dataset.populated) { statusSel.innerHTML = '<option value="">Semua Status</option>' + state.settings.statuses.map(s => `<option value="${s}">${s}</option>`).join(''); statusSel.dataset.populated = 'true'; }
+  if (statusSel && !statusSel.dataset.populated) { statusSel.innerHTML = '<option value="">Semua Status</option>' + state.settings.statuses.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join(''); statusSel.dataset.populated = 'true'; }
   renderArchiveTableOnly();
   const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
   const typeFilter = document.getElementById('filterType')?.value || '';
@@ -2030,7 +2041,7 @@ function renderStatusFlow(current) {
   const idx = statuses.indexOf(current);
   return statuses.map((s, i) => {
     const active = i <= idx ? 'active' : '';
-    return `<div class="flow-step ${active}"><div class="flow-dot ${active}"></div>${s}</div>${i < statuses.length-1 ? '<div class="flow-line"></div>' : ''}`;
+    return `<div class="flow-step ${active}"><div class="flow-dot ${active}"></div>${escapeHtml(s)}</div>${i < statuses.length-1 ? '<div class="flow-line"></div>' : ''}`;
   }).join('');
 }
 
@@ -2058,7 +2069,7 @@ function renderMaster() {
 let builderState = { id: null, name: '', desc: '', counter: 1, separator: '/', segments: [] };
 
 function renderTemplateList() {
-  return `<div class="section"><div class="section-header"><span class="section-title">Template</span><button class="btn btn-primary" onclick="openTemplateBuilder()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Buat Template Baru</button></div><div class="template-grid">${state.templates.map((t, i) => `<div class="template-card" style="animation-delay:${i*0.08}s"><div class="template-name">${t.name}<span class="template-count" style="margin-left:8px;background:var(--accentLight);color:var(--accent)">#${t.counter || 1}</span></div><div class="template-desc">${t.desc}</div><div class="template-format">${t.format || generatePreview(t.segments, t)}</div><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-sm btn-secondary" onclick="editTemplateBuilder('${t.id}')">Edit</button><button class="btn btn-sm btn-danger" onclick="deleteTemplate('${t.id}')">Hapus</button></div></div>`).join('')}</div></div>`;
+  return `<div class="section"><div class="section-header"><span class="section-title">Template</span><button class="btn btn-primary" onclick="openTemplateBuilder()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Buat Template Baru</button></div><div class="template-grid">${state.templates.map((t, i) => `<div class="template-card" style="animation-delay:${i*0.08}s"><div class="template-name">${escapeHtml(t.name)}<span class="template-count" style="margin-left:8px;background:var(--accentLight);color:var(--accent)">#${t.counter || 1}</span></div><div class="template-desc">${escapeHtml(t.desc)}</div><div class="template-format">${escapeHtml(t.format || generatePreview(t.segments, t))}</div><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-sm btn-secondary" onclick="editTemplateBuilder('${escapeJsAttr(t.id)}')">Edit</button><button class="btn btn-sm btn-danger" onclick="deleteTemplate('${escapeJsAttr(t.id)}')">Hapus</button></div></div>`).join('')}</div></div>`;
 }
 function openTemplateBuilder() {
   builderState = { id: null, name: '', desc: '', counter: 1, separator: '/', segments: [{key:'counter',type:'counter',value:''},{key:'company',type:'company',value:'IPI'}] };
@@ -2083,7 +2094,7 @@ function renderTemplateBuilder() {
   const usedKeys = new Set(builderState.segments.map(s => s.key));
   const availableSegs = allSegs.filter(s => !usedKeys.has(s.key));
   const previewNumber = generateBuilderPreview();
-  return `<div class="section" id="templateBuilderSection"><div class="section-header"><span class="section-title">${builderState.id ? 'Edit' : 'Buat'} Template</span><button class="btn btn-sm btn-secondary" onclick="switchMasterTab('templates')">Kembali</button></div><div class="template-builder-shortcuts"><span class="shortcut-badge"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> Simpan</span><span class="shortcut-badge"><kbd>Esc</kbd> Batal</span></div><div class="template-builder-layout"><div class="template-builder-panel"><div class="builder-heading">${builderState.id ? 'Edit Template' : 'Template Baru'}</div><div class="template-form-group"><label class="template-form-label">Nama Template</label><input type="text" class="form-input" id="builderName" placeholder="Contoh: Surat Keluar" value="${escapeHtml(builderState.name)}" oninput="updateBuilderName(this.value)"></div><div class="template-form-group"><label class="template-form-label">Deskripsi</label><input type="text" class="form-input" id="builderDesc" placeholder="Deskripsi singkat template" value="${escapeHtml(builderState.desc)}" oninput="updateBuilderDesc(this.value)"></div><div class="template-form-group"><label class="template-form-label">Index Awal (Nomor Pertama)</label><input type="number" class="form-input" id="builderCounter" placeholder="1" min="1" value="${builderState.counter}" oninput="updateBuilderCounter(this.value)"><p class="template-form-hint">Nomor pertama yang akan dihasilkan (misal: 102 &rarr; dokumen pertama = .../102)</p></div><div class="add-segment-row"><label class="template-form-label" style="margin:0">Format Segments</label>${availableSegs.length > 0 ? `<button class="add-segment-btn" onclick="addBuilderSegment()">+ Tambah Segment</button>` : ''}</div><div class="segment-builder-list" id="builderSegmentList">${builderState.segments.map((seg, idx) => renderBuilderSegmentItem(seg, idx)).join('')}</div><button class="builder-save-btn" onclick="saveBuilderTemplate()" id="builderSaveBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> ${builderState.id ? 'Simpan Perubahan' : 'Simpan Template'}</button></div><div class="template-preview-panel"><div class="preview-title">Pratinjau Format</div><p class="preview-subtitle">Nomor pertama yang akan dihasilkan:</p><div class="preview-box" id="builderPreviewBox">${previewNumber}</div><div class="preview-title">Struktur:</div><div class="structure-list" id="builderStructureList">${renderBuilderStructure()}</div></div></div></div>`;
+  return `<div class="section" id="templateBuilderSection"><div class="section-header"><span class="section-title">${builderState.id ? 'Edit' : 'Buat'} Template</span><button class="btn btn-sm btn-secondary" onclick="switchMasterTab('templates')">Kembali</button></div><div class="template-builder-shortcuts"><span class="shortcut-badge"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> Simpan</span><span class="shortcut-badge"><kbd>Esc</kbd> Batal</span></div><div class="template-builder-layout"><div class="template-builder-panel"><div class="builder-heading">${builderState.id ? 'Edit Template' : 'Template Baru'}</div><div class="template-form-group"><label class="template-form-label">Nama Template</label><input type="text" class="form-input" id="builderName" placeholder="Contoh: Surat Keluar" value="${escapeHtml(builderState.name)}" oninput="updateBuilderName(this.value)"></div><div class="template-form-group"><label class="template-form-label">Deskripsi</label><input type="text" class="form-input" id="builderDesc" placeholder="Deskripsi singkat template" value="${escapeHtml(builderState.desc)}" oninput="updateBuilderDesc(this.value)"></div><div class="template-form-group"><label class="template-form-label">Index Awal (Nomor Pertama)</label><input type="number" class="form-input" id="builderCounter" placeholder="1" min="1" value="${builderState.counter}" oninput="updateBuilderCounter(this.value)"><p class="template-form-hint">Nomor pertama yang akan dihasilkan (misal: 102 &rarr; dokumen pertama = .../102)</p></div><div class="add-segment-row"><label class="template-form-label" style="margin:0">Format Segments</label>${availableSegs.length > 0 ? `<button class="add-segment-btn" onclick="addBuilderSegment()">+ Tambah Segment</button>` : ''}</div><div class="segment-builder-list" id="builderSegmentList">${builderState.segments.map((seg, idx) => renderBuilderSegmentItem(seg, idx)).join('')}</div><button class="builder-save-btn" onclick="saveBuilderTemplate()" id="builderSaveBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> ${builderState.id ? 'Simpan Perubahan' : 'Simpan Template'}</button></div><div class="template-preview-panel"><div class="preview-title">Pratinjau Format</div><p class="preview-subtitle">Nomor pertama yang akan dihasilkan:</p><div class="preview-box" id="builderPreviewBox">${escapeHtml(previewNumber)}</div><div class="preview-title">Struktur:</div><div class="structure-list" id="builderStructureList">${renderBuilderStructure()}</div></div></div></div>`;
 }
 function renderBuilderSegmentItem(seg, idx) {
   const allSegs = [...SEGMENT_TYPES, ...state.customSegments];
@@ -2121,7 +2132,7 @@ function renderBuilderStructure() {
       else if (isCustomText || isCustomSeg) text = sep + 'Teks Kustom = "' + (seg.value || segDef.sample || '') + '"';
       else text = sep + segDef.label;
     }
-    return `<div class="structure-item" style="animation-delay:${idx*0.05}s"><div class="structure-num">${idx+1}</div><div><span class="structure-text">${text}</span></div></div>`;
+    return `<div class="structure-item" style="animation-delay:${idx*0.05}s"><div class="structure-num">${idx+1}</div><div><span class="structure-text">${escapeHtml(text)}</span></div></div>`;
   }).join('');
 }
 function generateBuilderPreview() {
@@ -2138,6 +2149,16 @@ function generateBuilderPreview() {
 function escapeHtml(text) {
   if (!text) return '';
   const div = document.createElement('div'); div.textContent = text; return div.innerHTML;
+}
+// Untuk nilai yang disisipkan di dalam onclick="fn('...')" (string literal beratanda kutip tunggal
+// di dalam atribut HTML beratanda kutip ganda) — cegah keluar dari kedua konteks sekaligus.
+function escapeJsAttr(text) {
+  if (!text) return '';
+  return String(text).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+// Untuk nama class CSS yang diturunkan dari input user (mis. nama status) — buang semua karakter selain a-z0-9.
+function safeClass(text) {
+  return String(text || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
 // Builder actions
@@ -2313,7 +2334,7 @@ function addTemplate() {
 // ===================== SETTINGS =====================
 function renderSettings() {
   // Status workflow
-  document.getElementById('settingsStatusList').innerHTML = state.settings.statuses.map((s, i) => `<div class="master-item" style="animation-delay:${i*0.05}s"><div class="master-item-info"><div class="master-item-title">${i+1}. ${s}</div></div><div style="display:flex;gap:6px">${i > 0 ? `<button class="action-btn" onclick="moveStatus(${i}, -1)" title="Naik" data-tooltip="Naik">\u2191</button>` : ''}${i < state.settings.statuses.length-1 ? `<button class="action-btn" onclick="moveStatus(${i}, 1)" title="Turun" data-tooltip="Turun">\u2193</button>` : ''}<button class="action-btn delete" onclick="removeStatus(${i})" title="Hapus" data-tooltip="Hapus">\u00d7</button></div></div>`).join('');
+  document.getElementById('settingsStatusList').innerHTML = state.settings.statuses.map((s, i) => `<div class="master-item" style="animation-delay:${i*0.05}s"><div class="master-item-info"><div class="master-item-title">${i+1}. ${escapeHtml(s)}</div></div><div style="display:flex;gap:6px">${i > 0 ? `<button class="action-btn" onclick="moveStatus(${i}, -1)" title="Naik" data-tooltip="Naik">\u2191</button>` : ''}${i < state.settings.statuses.length-1 ? `<button class="action-btn" onclick="moveStatus(${i}, 1)" title="Turun" data-tooltip="Turun">\u2193</button>` : ''}<button class="action-btn delete" onclick="removeStatus(${i})" title="Hapus" data-tooltip="Hapus">\u00d7</button></div></div>`).join('');
   document.getElementById('autoResetYear').checked = !!state.settings.autoResetYear;
 
   // Theme presets
