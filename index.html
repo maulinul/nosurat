@@ -4,6 +4,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LetterLog - Document Tracker Pro</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#8B6F47">
 <style>
     :root {
     --bg: #F5F0E8; --sidebar: #EDE5D5; --surface: #FFFDF9; --surfaceHover: #F5F0E8;
@@ -124,13 +126,14 @@
   @keyframes auroraDriftB { 0%, 100% { transform: translate3d(10%, 4%, 0) rotate(10deg) scale(1.12); } 50% { transform: translate3d(-12%, -8%, 0) rotate(-7deg) scale(.96); } }
   @keyframes ambientRise { 0% { transform: translate3d(0, 24px, 0) scale(.5); opacity: 0; } 12% { opacity: var(--particle-opacity, .55); } 82% { opacity: var(--particle-opacity, .55); } 100% { transform: translate3d(var(--particle-drift, 24px), -110vh, 0) scale(1.15); opacity: 0; } }
   @keyframes fireflyPulse { 0%, 100% { filter: blur(.2px); box-shadow: 0 0 5px currentColor; } 50% { filter: blur(1px); box-shadow: 0 0 16px currentColor; } }
-  .ambient-background { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; opacity: var(--ambient-opacity, .72); transition: opacity .45s ease; }
+  .ambient-background { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; opacity: var(--ambient-opacity, .86); transition: opacity .45s ease; background: radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--primary) 28%, transparent), transparent 38%), radial-gradient(circle at 84% 82%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 42%); }
   .ambient-background[hidden] { display: none; }
-  .ambient-aurora { position: absolute; width: 68vw; height: 56vw; min-width: 680px; min-height: 560px; border-radius: 48%; filter: blur(88px); opacity: .16; will-change: transform; }
+  .ambient-aurora { position: absolute; width: 72vw; height: 58vw; min-width: 680px; min-height: 560px; border-radius: 48%; filter: blur(72px); opacity: .38; mix-blend-mode: multiply; will-change: transform; }
   .ambient-aurora.one { top: -34%; left: 14%; background: var(--primary); animation: auroraDriftA 24s ease-in-out infinite; }
   .ambient-aurora.two { right: -22%; bottom: -38%; background: var(--accent); animation: auroraDriftB 29s ease-in-out infinite; }
-  .ambient-aurora.three { left: 22%; bottom: -50%; background: var(--success); opacity: .09; animation: auroraDriftA 34s ease-in-out infinite reverse; }
-  .ambient-particle { position: absolute; bottom: -20px; border-radius: 50%; color: var(--accent); background: currentColor; animation: ambientRise var(--particle-duration, 14s) linear infinite, fireflyPulse 2.8s ease-in-out infinite; will-change: transform, opacity; }
+  .ambient-aurora.three { left: 22%; bottom: -50%; background: var(--success); opacity: .24; animation: auroraDriftA 34s ease-in-out infinite reverse; }
+  .dark .ambient-aurora { opacity: .5; mix-blend-mode: screen; }
+  .ambient-particle { position: absolute; bottom: -20px; border-radius: 50%; color: var(--accent); background: currentColor; animation: ambientRise var(--particle-duration, 14s) linear infinite, fireflyPulse 2.8s ease-in-out infinite; box-shadow: 0 0 12px currentColor; will-change: transform, opacity; }
   .ambient-background[data-mode="embers"] .ambient-particle { color: #f97316; border-radius: 55% 45% 55% 45%; box-shadow: 0 0 10px #fb923c; }
   .ambient-background[data-mode="fireflies"] .ambient-particle:nth-child(3n) { color: var(--primary); }
   .ambient-background[data-mode="fireflies"] .ambient-particle:nth-child(4n) { color: var(--success); }
@@ -140,12 +143,12 @@
   body.glass-workspace .stat-card,
   body.glass-workspace .template-card,
   body.glass-workspace .collapsible-section,
-  body.glass-workspace .modal { background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: blur(16px) saturate(118%); -webkit-backdrop-filter: blur(16px) saturate(118%); box-shadow: 0 12px 36px var(--shadow); }
-  body.glass-workspace .main { background: linear-gradient(135deg, color-mix(in srgb, var(--bg) 72%, transparent), color-mix(in srgb, var(--bg) 90%, transparent)); }
+  body.glass-workspace .modal { background: color-mix(in srgb, var(--surface) 82%, transparent); backdrop-filter: blur(16px) saturate(118%); -webkit-backdrop-filter: blur(16px) saturate(118%); box-shadow: 0 12px 36px var(--shadow); }
+  body.glass-workspace .main { background: linear-gradient(135deg, color-mix(in srgb, var(--bg) 42%, transparent), color-mix(in srgb, var(--bg) 64%, transparent)); }
   @supports not (background: color-mix(in srgb, white 50%, transparent)) {
     body.glass-workspace .sidebar, body.glass-workspace .section, body.glass-workspace .stat-card, body.glass-workspace .template-card, body.glass-workspace .collapsible-section, body.glass-workspace .modal { background: var(--surface); }
   }
-  @media (max-width: 700px) { .ambient-aurora { filter: blur(64px); opacity: .11; } body.glass-workspace .section, body.glass-workspace .stat-card, body.glass-workspace .template-card { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); } }
+  @media (max-width: 700px) { .ambient-aurora { filter: blur(56px); opacity: .28; } body.glass-workspace .section, body.glass-workspace .stat-card, body.glass-workspace .template-card { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); } }
   @media (prefers-reduced-motion: reduce) {
     .ambient-background * { animation: none !important; }
     .ambient-particle { display: none; }
@@ -2716,7 +2719,8 @@ function refreshAmbientColors() {
   const container = document.getElementById('ambientBackground');
   if (!container) return;
   const intensity = Math.max(25, Math.min(100, Number(state.settings.ambientIntensity ?? 70)));
-  container.style.setProperty('--ambient-opacity', (intensity / 100).toFixed(2));
+  // Keep low settings visible; intensity controls ambience without fading it into nothing.
+  container.style.setProperty('--ambient-opacity', (0.6 + intensity * 0.004).toFixed(2));
 }
 
 function initAmbientBackground() {
@@ -2743,7 +2747,7 @@ function initAmbientBackground() {
     particle.className = 'ambient-particle';
     const size = mode === 'embers' ? Math.random() * 4 + 2 : Math.random() * 5 + 2;
     const duration = (mode === 'embers' ? 8 : 12) + Math.random() * 10;
-    particle.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;--particle-duration:${duration}s;--particle-drift:${(Math.random()-.5)*100}px;--particle-opacity:${Math.random()*.35+.25};animation-delay:${-Math.random()*duration}s`;
+    particle.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;--particle-duration:${duration}s;--particle-drift:${(Math.random()-.5)*100}px;--particle-opacity:${Math.random()*.3+.5};animation-delay:${-Math.random()*duration}s`;
     container.appendChild(particle);
   }
 }
