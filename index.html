@@ -119,6 +119,39 @@
     pointer-events: none; z-index: 9998;
   }
 
+  /* ===== AMBIENT BACKGROUND & GLASS WORKSPACE ===== */
+  @keyframes auroraDriftA { 0%, 100% { transform: translate3d(-8%, -4%, 0) rotate(-8deg) scale(1); } 50% { transform: translate3d(12%, 8%, 0) rotate(8deg) scale(1.16); } }
+  @keyframes auroraDriftB { 0%, 100% { transform: translate3d(10%, 4%, 0) rotate(10deg) scale(1.12); } 50% { transform: translate3d(-12%, -8%, 0) rotate(-7deg) scale(.96); } }
+  @keyframes ambientRise { 0% { transform: translate3d(0, 24px, 0) scale(.5); opacity: 0; } 12% { opacity: var(--particle-opacity, .55); } 82% { opacity: var(--particle-opacity, .55); } 100% { transform: translate3d(var(--particle-drift, 24px), -110vh, 0) scale(1.15); opacity: 0; } }
+  @keyframes fireflyPulse { 0%, 100% { filter: blur(.2px); box-shadow: 0 0 5px currentColor; } 50% { filter: blur(1px); box-shadow: 0 0 16px currentColor; } }
+  .ambient-background { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; opacity: var(--ambient-opacity, .72); transition: opacity .45s ease; }
+  .ambient-background[hidden] { display: none; }
+  .ambient-aurora { position: absolute; width: 68vw; height: 56vw; min-width: 680px; min-height: 560px; border-radius: 48%; filter: blur(88px); opacity: .16; will-change: transform; }
+  .ambient-aurora.one { top: -34%; left: 14%; background: var(--primary); animation: auroraDriftA 24s ease-in-out infinite; }
+  .ambient-aurora.two { right: -22%; bottom: -38%; background: var(--accent); animation: auroraDriftB 29s ease-in-out infinite; }
+  .ambient-aurora.three { left: 22%; bottom: -50%; background: var(--success); opacity: .09; animation: auroraDriftA 34s ease-in-out infinite reverse; }
+  .ambient-particle { position: absolute; bottom: -20px; border-radius: 50%; color: var(--accent); background: currentColor; animation: ambientRise var(--particle-duration, 14s) linear infinite, fireflyPulse 2.8s ease-in-out infinite; will-change: transform, opacity; }
+  .ambient-background[data-mode="embers"] .ambient-particle { color: #f97316; border-radius: 55% 45% 55% 45%; box-shadow: 0 0 10px #fb923c; }
+  .ambient-background[data-mode="fireflies"] .ambient-particle:nth-child(3n) { color: var(--primary); }
+  .ambient-background[data-mode="fireflies"] .ambient-particle:nth-child(4n) { color: var(--success); }
+  .app { position: relative; z-index: 1; }
+  body.glass-workspace .sidebar { background: color-mix(in srgb, var(--sidebar) 84%, transparent) !important; backdrop-filter: blur(22px) saturate(125%); -webkit-backdrop-filter: blur(22px) saturate(125%); }
+  body.glass-workspace .section,
+  body.glass-workspace .stat-card,
+  body.glass-workspace .template-card,
+  body.glass-workspace .collapsible-section,
+  body.glass-workspace .modal { background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: blur(16px) saturate(118%); -webkit-backdrop-filter: blur(16px) saturate(118%); box-shadow: 0 12px 36px var(--shadow); }
+  body.glass-workspace .main { background: linear-gradient(135deg, color-mix(in srgb, var(--bg) 72%, transparent), color-mix(in srgb, var(--bg) 90%, transparent)); }
+  @supports not (background: color-mix(in srgb, white 50%, transparent)) {
+    body.glass-workspace .sidebar, body.glass-workspace .section, body.glass-workspace .stat-card, body.glass-workspace .template-card, body.glass-workspace .collapsible-section, body.glass-workspace .modal { background: var(--surface); }
+  }
+  @media (max-width: 700px) { .ambient-aurora { filter: blur(64px); opacity: .11; } body.glass-workspace .section, body.glass-workspace .stat-card, body.glass-workspace .template-card { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .ambient-background * { animation: none !important; }
+    .ambient-particle { display: none; }
+    .ambient-aurora { transform: none !important; }
+  }
+
   /* ===== LAYOUT ===== */
   .app { display: flex; min-height: 100vh; }
   .sidebar { width: var(--sidebarWidth); background: var(--sidebar); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 50; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -518,7 +551,7 @@
   .token-toggle:hover { color: var(--textPrimary); }
 
   /* ===== MOUSE TRAIL SELECTOR ===== */
-  .trail-option-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .trail-option-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 12px; }
   .trail-option-card { padding: 16px; border-radius: 10px; border: 2px solid var(--border); cursor: pointer; text-align: center; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); background: var(--surface); position: relative; overflow: hidden; }
   .trail-option-card:hover { border-color: var(--accentHover); transform: translateY(-3px); box-shadow: 0 8px 24px var(--shadowHover); }
   .trail-option-card.active { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accentRing); background: var(--accentLight); }
@@ -884,6 +917,13 @@
 <!-- Mouse Trail Canvas -->
 <canvas class="mouse-trail-canvas" id="mouseTrailCanvas" style="display: none;"></canvas>
 
+<!-- Ambient Background (independent from the optional mouse trail) -->
+<div class="ambient-background" id="ambientBackground" data-mode="aurora" aria-hidden="true">
+  <div class="ambient-aurora one"></div>
+  <div class="ambient-aurora two"></div>
+  <div class="ambient-aurora three"></div>
+</div>
+
 <div class="app">
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -1118,6 +1158,40 @@
             <p>Konfigurasi aplikasi, tema, dan preferensi</p>
           </div>
         </div>
+
+        <!-- Ambient Background Section -->
+        <details class="collapsible-section" id="collapse-atmosphere" open>
+          <summary class="collapsible-summary">
+            <span class="collapsible-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15a4 4 0 0 0 4 4h10a4 4 0 1 0-.7-7.94A6 6 0 0 0 4.2 9.6 4 4 0 0 0 3 15z"/></svg> Motion &amp; Atmosphere</span>
+          </summary>
+          <div class="collapsible-content">
+            <p style="font-size:13px;color:var(--textSecondary);margin-bottom:16px">Pilih suasana background. Efek ini berdiri sendiri dari jejak kursor.</p>
+            <div class="trail-option-grid" id="ambientOptions">
+              <div class="trail-option-card" id="ambientCardNone" onclick="setAmbientBackground('none')">
+                <div class="trail-preview" style="background:var(--border)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--textMuted)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+                <div class="trail-option-name">Tenang</div><div class="trail-option-desc">Tanpa background bergerak</div>
+              </div>
+              <div class="trail-option-card" id="ambientCardAurora" onclick="setAmbientBackground('aurora')">
+                <div class="trail-preview" style="background:radial-gradient(circle at 30% 30%,var(--primary),transparent 58%),radial-gradient(circle at 70% 70%,var(--accent),transparent 62%);animation:glowPulse 3s ease-in-out infinite"></div>
+                <div class="trail-option-name">Aurora</div><div class="trail-option-desc">Gradient lembut dan modern</div>
+              </div>
+              <div class="trail-option-card" id="ambientCardFireflies" onclick="setAmbientBackground('fireflies')">
+                <div class="trail-preview" style="background:radial-gradient(circle at 30% 35%,var(--accent) 0 3px,transparent 4px),radial-gradient(circle at 68% 60%,var(--success) 0 2px,transparent 3px),var(--primaryLight);box-shadow:inset 0 0 18px var(--accentLight)"></div>
+                <div class="trail-option-name">Fireflies</div><div class="trail-option-desc">Partikel cahaya yang tenang</div>
+              </div>
+              <div class="trail-option-card" id="ambientCardEmbers" onclick="setAmbientBackground('embers')">
+                <div class="trail-preview" style="background:radial-gradient(circle at 35% 65%,#fb923c 0 3px,transparent 4px),radial-gradient(circle at 65% 35%,#f97316 0 2px,transparent 3px),#431407;box-shadow:inset 0 0 20px #f9731655"></div>
+                <div class="trail-option-name">Embers</div><div class="trail-option-desc">Bara hangat yang halus</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap">
+              <label class="form-label" for="ambientIntensity" style="margin:0">Intensitas</label>
+              <input id="ambientIntensity" type="range" min="25" max="100" step="5" value="70" oninput="setAmbientIntensity(this.value)" style="flex:1;min-width:180px;accent-color:var(--accent)">
+              <span id="ambientIntensityValue" style="min-width:42px;font-size:12px;color:var(--textSecondary)">70%</span>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textSecondary)"><input type="checkbox" id="glassWorkspace" onchange="setGlassWorkspace(this.checked)"> Glassy workspace</label>
+            </div>
+          </div>
+        </details>
 
         <!-- Mouse Trail Section -->
         <details class="collapsible-section" id="collapse-mouse-trail" open>
@@ -1413,7 +1487,7 @@ let state = {
   divisions: [{code:'BAHP', name:'Bahana Properti'}],
   projects: [{code:'MBG', name:'MBG Project'}, {code:'SBIZ', name:'Sunbiz Project'}],
   segmentCodes: { company: ['IPI','SBIZ'], division: ['BAHP'], project: ['MBG','SBIZ'], type: ['SRT','SPM-PROJECT'] },
-  settings: { statuses: [...DEFAULT_STATUSES], autoResetYear: true, monthFormat: 'roman', theme: 'light', themePreset: 'warm', customColors: {}, customCSS: '', mouseTrail: 'none', githubToken: '', gistId: '' },
+  settings: { statuses: [...DEFAULT_STATUSES], autoResetYear: true, monthFormat: 'roman', theme: 'light', themePreset: 'warm', customColors: {}, customCSS: '', ambientBackground: 'aurora', ambientIntensity: 70, glassWorkspace: true, mouseTrail: 'none', githubToken: '', gistId: '' },
   currentEditId: null, masterTab: 'codes', selectedDocIds: new Set(),
   segmentTypes: null, customSegments: []
 };
@@ -1464,6 +1538,7 @@ function shakeElement(element) { element.classList.add('attention'); setTimeout(
 function init() {
   loadState();
   applyTheme();
+  initAmbientBackground();
   initMouseTrail();
   renderAll();
   setupKeyboard();
@@ -1577,6 +1652,7 @@ function applyTheme() {
   if (!customStyle) { customStyle = document.createElement('style'); customStyle.id = 'custom-theme-style'; document.head.appendChild(customStyle); }
   customStyle.textContent = state.settings.customCSS ? ':root { ' + state.settings.customCSS + ' }' : '';
   document.getElementById('themeLabel').textContent = isDark ? 'Mode Gelap' : 'Mode Terang';
+  refreshAmbientColors();
 }
 function toggleTheme() {
   const modes = ['light','dark','auto'];
@@ -2374,6 +2450,20 @@ function renderSettings() {
   const trailCard = document.getElementById(trailId);
   if (trailCard) trailCard.classList.add('active');
 
+  // Ambient background and glass workspace
+  document.querySelectorAll('#ambientOptions .trail-option-card').forEach(card => card.classList.remove('active'));
+  const ambientMode = state.settings.ambientBackground || 'aurora';
+  const ambientId = 'ambientCard' + ambientMode.charAt(0).toUpperCase() + ambientMode.slice(1);
+  const ambientCard = document.getElementById(ambientId);
+  if (ambientCard) ambientCard.classList.add('active');
+  const intensity = Number(state.settings.ambientIntensity ?? 70);
+  const intensityInput = document.getElementById('ambientIntensity');
+  const intensityValue = document.getElementById('ambientIntensityValue');
+  const glassInput = document.getElementById('glassWorkspace');
+  if (intensityInput) intensityInput.value = intensity;
+  if (intensityValue) intensityValue.textContent = intensity + '%';
+  if (glassInput) glassInput.checked = state.settings.glassWorkspace !== false;
+
   // GitHub sync UI
   renderGithubSyncUI();
 }
@@ -2584,6 +2674,84 @@ function copyGistUrl() {
   const url = document.getElementById('syncGistUrl').textContent;
   if (url && url !== '-') navigator.clipboard.writeText(url).then(() => showToast('URL Gist disalin', 'success'));
 }
+
+// ===================== AMBIENT BACKGROUND =====================
+let ambientSaveTimer = null;
+
+function persistVisualSettings() {
+  clearTimeout(ambientSaveTimer);
+  ambientSaveTimer = setTimeout(() => {
+    try {
+      state.segmentTypes = SEGMENT_TYPES;
+      const toSave = { ...state, settings: { ...state.settings, selectedDocIds: Array.from(state.selectedDocIds) }, segmentTypes: SEGMENT_TYPES };
+      localStorage.setItem('letterlog_state', JSON.stringify(toSave));
+    } catch (e) { console.error('Visual settings save error', e); }
+  }, 180);
+}
+
+function setAmbientBackground(mode) {
+  state.settings.ambientBackground = ['none', 'aurora', 'fireflies', 'embers'].includes(mode) ? mode : 'aurora';
+  persistVisualSettings();
+  initAmbientBackground();
+  renderSettings();
+  showToast('Background: ' + (mode === 'none' ? 'Tenang' : mode.charAt(0).toUpperCase() + mode.slice(1)), 'info');
+}
+
+function setAmbientIntensity(value) {
+  const intensity = Math.max(25, Math.min(100, Number(value) || 70));
+  state.settings.ambientIntensity = intensity;
+  const label = document.getElementById('ambientIntensityValue');
+  if (label) label.textContent = intensity + '%';
+  refreshAmbientColors();
+  persistVisualSettings();
+}
+
+function setGlassWorkspace(enabled) {
+  state.settings.glassWorkspace = !!enabled;
+  document.body.classList.toggle('glass-workspace', !!enabled);
+  persistVisualSettings();
+}
+
+function refreshAmbientColors() {
+  const container = document.getElementById('ambientBackground');
+  if (!container) return;
+  const intensity = Math.max(25, Math.min(100, Number(state.settings.ambientIntensity ?? 70)));
+  container.style.setProperty('--ambient-opacity', (intensity / 100).toFixed(2));
+}
+
+function initAmbientBackground() {
+  const container = document.getElementById('ambientBackground');
+  if (!container) return;
+  const mode = state.settings.ambientBackground || 'aurora';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  container.querySelectorAll('.ambient-particle').forEach(p => p.remove());
+  container.dataset.mode = mode;
+  container.hidden = mode === 'none';
+  document.body.classList.toggle('glass-workspace', state.settings.glassWorkspace !== false);
+  refreshAmbientColors();
+
+  const auroras = container.querySelectorAll('.ambient-aurora');
+  auroras.forEach(layer => { layer.style.display = mode === 'aurora' ? 'block' : 'none'; });
+  if (mode === 'none' || mode === 'aurora' || reduceMotion) return;
+
+  const isMobile = window.matchMedia('(max-width: 700px)').matches;
+  const baseCount = isMobile ? 15 : 36;
+  const intensity = Number(state.settings.ambientIntensity ?? 70) / 100;
+  const count = Math.max(8, Math.round(baseCount * intensity));
+  for (let i = 0; i < count; i++) {
+    const particle = document.createElement('i');
+    particle.className = 'ambient-particle';
+    const size = mode === 'embers' ? Math.random() * 4 + 2 : Math.random() * 5 + 2;
+    const duration = (mode === 'embers' ? 8 : 12) + Math.random() * 10;
+    particle.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;--particle-duration:${duration}s;--particle-drift:${(Math.random()-.5)*100}px;--particle-opacity:${Math.random()*.35+.25};animation-delay:${-Math.random()*duration}s`;
+    container.appendChild(particle);
+  }
+}
+
+document.addEventListener('visibilitychange', () => {
+  const container = document.getElementById('ambientBackground');
+  if (container) container.querySelectorAll('*').forEach(el => { el.style.animationPlayState = document.hidden ? 'paused' : 'running'; });
+});
 
 // ===================== MOUSE TRAIL (3 OPTIONS) =====================
 let mouseTrailActive = 'none';
@@ -2827,4 +2995,4 @@ window.addEventListener('DOMContentLoaded', init);
 </script>
 
 
-<div class="trail-sparkle" style="left: 463.897px; top: 338.897px; width: 12.206px; height: 12.206px; --sparkle-color: #64748B; --sparkle-life: 767.4630180574168ms; transform: rotate(223.868deg); --drift: -12.170580578880749px;"></div><div class="trail-sparkle" style="left: 466.487px; top: 341.487px; width: 7.02671px; height: 7.02671px; --sparkle-color: #64748B; --sparkle-life: 542.5390057872241ms; transform: rotate(147.999deg); --drift: -7.378329219076538px;"></div><div class="trail-sparkle" style="left: 464.721px; top: 339.721px; width: 10.5587px; height: 10.5587px; --sparkle-color: #64748B; --sparkle-life: 670.4502265953242ms; transform: rotate(315.368deg); --drift: 6.251552616247147px;"></div><div class="trail-sparkle" style="left: 462.414px; top: 337.414px; width: 15.1721px; height: 15.1721px; --sparkle-color: #64748B; --sparkle-life: 644.7941708344513ms; transform: rotate(8.1698deg); --drift: -5.34882863436263px;"></div><div class="trail-sparkle" style="left: 465.289px; top: 340.289px; width: 9.42231px; height: 9.42231px; --sparkle-color: #64748B; --sparkle-life: 858.4531600427553ms; transform: rotate(68.9719deg); --drift: 3.6690246047512742px;"></div><div class="trail-sparkle" style="left: 464.743px; top: 339.743px; width: 10.5148px; height: 10.5148px; --sparkle-color: #64748B; --sparkle-life: 845.7565767305373ms; transform: rotate(17.665deg); --drift: -8.343753664617806px;"></div><div class="trail-sparkle" style="left: 466.459px; top: 341.459px; width: 7.08276px; height: 7.08276px; --sparkle-color: #64748B; --sparkle-life: 532.56481856489ms; transform: rotate(176.074deg); --drift: 17.028027133607186px;"></div><div class="trail-sparkle" style="left: 462.333px; top: 337.333px; width: 15.3332px; height: 15.3332px; --sparkle-color: #64748B; --sparkle-life: 661.4679301831012ms; transform: rotate(191.075deg); --drift: -9.85969143314961px;"></div><div class="trail-sparkle" style="left: 465.851px; top: 340.851px; width: 8.2971px; height: 8.2971px; --sparkle-color: #64748B; --sparkle-life: 549.2044647954568ms; transform: rotate(350.906deg); --drift: 11.156525974429492px;"></div><div class="trail-sparkle" style="left: 466.133px; top: 341.133px; width: 7.73416px; height: 7.73416px; --sparkle-color: #64748B; --sparkle-life: 684.3841749569909ms; transform: rotate(71.0085deg); --drift: -11.897516269325505px;"></div><div class="trail-sparkle" style="left: 463.886px; top: 338.886px; width: 12.228px; height: 12.228px; --sparkle-color: #64748B; --sparkle-life: 801.072085815488ms; transform: rotate(3.27979deg); --drift: -16.40842158193076px;"></div><div class="trail-sparkle" style="left: 462.434px; top: 337.434px; width: 15.1328px; height: 15.1328px; --sparkle-color: #64748B; --sparkle-life: 818.3874114507828ms; transform: rotate(206.048deg); --drift: 7.049561325264491px;"></div><div class="trail-sparkle" style="left: 464.78px; top: 339.78px; width: 10.4409px; height: 10.4409px; --sparkle-color: #64748B; --sparkle-life: 693.9650793145954ms; transform: rotate(153.85deg); --drift: -3.741657148356494px;"></div><div class="trail-sparkle" style="left: 464.939px; top: 339.939px; width: 10.1225px; height: 10.1225px; --sparkle-color: #64748B; --sparkle-life: 749.2362679105144ms; transform: rotate(0.902315deg); --drift: -13.496665107336657px;"></div><div class="trail-sparkle" style="left: 462.221px; top: 337.221px; width: 15.5587px; height: 15.5587px; --sparkle-color: #64748B; --sparkle-life: 824.1298228012145ms; transform: rotate(306.958deg); --drift: 8.111811878388169px;"></div><div class="trail-sparkle" style="left: 463.867px; top: 338.867px; width: 12.2662px; height: 12.2662px; --sparkle-color: #64748B; --sparkle-life: 605.7265337628354ms; transform: rotate(210.472deg); --drift: -19.05640721497177px;"></div><div class="trail-sparkle" style="left: 462.876px; top: 337.876px; width: 14.2472px; height: 14.2472px; --sparkle-color: #64748B; --sparkle-life: 609.7900785771966ms; transform: rotate(86.7093deg); --drift: -11.646095961506795px;"></div><div class="trail-sparkle" style="left: 463.286px; top: 338.286px; width: 13.4289px; height: 13.4289px; --sparkle-color: #64748B; --sparkle-life: 548.3143153641746ms; transform: rotate(131.774deg); --drift: -0.6835221306739436px;"></div></body></html>
+</body></html>

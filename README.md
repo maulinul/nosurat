@@ -33,6 +33,9 @@
 
 ### Efek Visual
 - **30+ Animasi Micro-interaction** - Hover effects, ripple buttons, transitions
+- **Ambient Background** - Aurora sebagai default, dengan opsi Fireflies, Embers, atau tanpa animasi
+- **Glassy Workspace** - Surface transparan lembut yang mengikuti warna tema aktif
+- **Kontrol Intensitas** - Atur kekuatan efek ambient secara terpisah dari mouse trail
 - **4 Pilihan Mouse Trail** - Nonaktif, Glow Dots, Sparkle, Constellation
 - **Confetti** - Saat berhasil menyimpan dokumen/export data
 - **Scroll Indicator** - Progress bar di atas layar
@@ -91,6 +94,14 @@
    - **Glow Dots** - Titik-titik halus mengikuti kursor
    - **Sparkle** - Partikel berkilau
    - **Constellation** - Jaringan titik terhubung (paling berat)
+
+### Mengatur Background Ambient
+1. Buka menu **Pengaturan**
+2. Buka bagian **Motion & Atmosphere**
+3. Pilih **Aurora**, **Fireflies**, **Embers**, atau **Tenang**
+4. Atur intensitas dan aktifkan/nonaktifkan **Glassy Workspace** sesuai kebutuhan
+
+Efek ambient dan mouse trail merupakan dua pengaturan terpisah. Animasi ambient otomatis disederhanakan pada layar kecil, berhenti saat tab tidak aktif, dan menghormati preferensi `prefers-reduced-motion`.
 
 ---
 
